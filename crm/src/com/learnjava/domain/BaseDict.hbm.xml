@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<!-- 建立类与表的映射 -->
+    <class name="com.learnjava.domain.BaseDict" table="base_dict">
+    
+    	<!-- 建立类中的属性与表中的主键映射 -->
+        <id name="dict_id" column="dict_id">
+            <generator class="native" />
+        </id>
+        
+		<!-- 建立类中的普通的属性和表中的字段的映射 -->
+		<property name="dict_type_code" column="dict_type_code" />	
+		<property name="dict_type_name" column="dict_type_name" />	
+		<property name="dict_item_name" column="dict_item_name" />	
+		<property name="dict_item_code" column="dict_item_code" />	
+		<property name="dict_sort" column="dict_sort" />	
+		<property name="dict_enable" column="dict_enable" />	
+		<property name="dict_memo" column="dict_memo" />	
+		
+		<!-- 字典和客户是一对多的关系,但是在查询字典的时候跟客户表是没关系的,就是不需要查客户表,所以这边就不需要配 one-to-many -->
+        
+    </class>
+</hibernate-mapping>

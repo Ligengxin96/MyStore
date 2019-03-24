@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <!-- 开启注解驱动 (一定要开啊,我tmd还以为注解错了,其实没错只是这个没开,为什么以前都没开,简直坑爹啊妈的)-->
+	<context:annotation-config/>
+	
+	<!-- 导入配置文件方法配置c3p0 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="DriverClass" value="${jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="User" value="${jdbc.name}" />
+		<property name="Password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 配置Hibernate的相关属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		
+		<!-- 引入映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/learnjava/domain/User.hbm.xml</value>
+				<value>com/learnjava/domain/Customer.hbm.xml</value>
+				<value>com/learnjava/domain/BaseDict.hbm.xml</value>
+				<value>com/learnjava/domain/LinkMan.hbm.xml</value>
+				<value>com/learnjava/domain/SaleVisit.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	<!-- 配置user -->
+	<bean id="userAction" class="com.learnjava.web.action.UserAction" scope="prototype"></bean>
+	<bean id="userService" class="com.learnjava.service.impl.UserServiceImpl"></bean>
+	
+	<bean id="userDao" class="com.learnjava.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置customer -->
+	<bean id="customerAction" class="com.learnjava.web.action.CustomerAction" scope="prototype"></bean>
+	<bean id="customerService" class="com.learnjava.service.impl.CustomerServiceImpl"></bean>
+	
+	<bean id="customerDao" class="com.learnjava.dao.impl.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置baseDict -->
+	<bean id="baseDictAction" class="com.learnjava.web.action.BaseDictAction" scope="prototype"></bean>
+	<bean id="baseDictService" class="com.learnjava.service.impl.BaseDictServiceImpl"></bean>
+	
+	<bean id="baseDictDao" class="com.learnjava.dao.impl.BaseDictDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置linkMan -->
+	<bean id="linkManAction" class="com.learnjava.web.action.LinkManAction" scope="prototype"></bean>
+	<bean id="linkManService" class="com.learnjava.service.impl.LinkManServiceImpl"></bean>
+	
+	<bean id="linkManDao" class="com.learnjava.dao.impl.LinkManDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置SaleVisit -->
+	<bean id="saleVisitAction" class="com.learnjava.web.action.SaleVisitAction" scope="prototype"></bean>
+	<bean id="saleVisitService" class="com.learnjava.service.impl.SaleVisitServiceImpl"></bean>
+	
+	<bean id="saleVisitDao" class="com.learnjava.dao.impl.SaleVisitDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<!-- 开启 struts的开发者模式(改完这个配置文件可以不需要重启tomcat)-->
+	<constant name="struts.devMode" value="true" />
+	<!-- 设置拦截器上传文件的最大大小 -->
+	<constant name="struts.multipart.maxSize" value="5242880" />
+	
+	<package name="crm" extends="struts-default" namespace="/" strict-method-invocation="false">
+		<interceptors>
+			<interceptor name="privilegeInterceptor" class="com.learnjava.web.interceptor.PrivilegeInterceptor"></interceptor>
+		</interceptors>
+	
+	<global-results>
+		<result name="login">/login.jsp</result>
+	</global-results>		
+	
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registUI">/regist.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="success" type="redirect">/index.jsp</result>
+			
+			<interceptor-ref name="privilegeInterceptor">
+				<param name="excludeMethods">regist,login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action> 
+		
+		<action name="customer_*" class="customerAction" method="{1}">
+			<result name="saveUI">/jsp/customer/add.jsp</result>
+			<result name="editUI">/jsp/customer/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">customer_findAllCustomers.action</result>
+		    <result name="deleteSuccess" type="redirectAction">customer_findAllCustomers.action</result>
+		    <result name="updateSuccess" type="redirectAction">customer_findAllCustomers.action</result>
+			<result name="success">/jsp/customer/list.jsp</result>
+			<result name="input">/jsp/customer/add.jsp</result>
+			<!-- 引入拦截器 -->
+			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack">
+				<!-- 设置上传文件的最大大小 -->
+				<param name="fileUpload.maximumSize">2097152</param>
+				<!-- 设置允许文件的扩展名-->
+				<param name="fileUpload.allowedExtensions">.jpg</param>
+			</interceptor-ref>
+		</action> 
+		
+		<action name="linkMan_*" class="linkManAction" method="{1}">
+			<result name="saveUI">/jsp/linkman/add.jsp</result>
+			<result name="editUI">/jsp/linkman/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
+			<result name="deleteSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
+		    <result name="updateSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
+		    <result name="editSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
+			<result name="success">/jsp/linkman/list.jsp</result>
+			
+			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action> 
+		
+		<action name="saleVisit_*" class="saleVisitAction" method="{1}">
+			<result name="saveUI">/jsp/salevisit/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">saleVisit_findAllSaleVisits.action</result>
+			<result name="success">/jsp/salevisit/list.jsp</result>
+			
+			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action> 
+		
+		<action name="baseDict_*" class="baseDictAction" method="{1}">
+			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action> 
+		
+	</package>
+	
+</struts>
