@@ -31,7 +31,16 @@
 
 });
 </script>
- 
+
+ <script type="text/javascript">
+//异步查询书的总数
+ $(function() {
+ 	$.post("book_findBookCount.action",{"serchBookName": $("#bookName").val(),"categoryName": $("#categoryName").val()},function(data){
+ 		window.sessionStorage.setItem("bookCount",data);
+ 	},"json") ;
+ });
+</script>
+
 <script type="text/javascript">
  //异步查询图书分类
 $(function() {
@@ -53,13 +62,6 @@ $(function() {
 	},"json") ;
 });
  
-//异步查询书的总数
-$(function() {
-	$.post("book_findBookCount.action",{"serchBookName": $("#bookName").val(),"categoryName": $("#categoryName").val()},function(data){
-		window.sessionStorage.setItem("bookCount",data);
-	},"json") ;
-});
-
 </script>
 
 <script>
