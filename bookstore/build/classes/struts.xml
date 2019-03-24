@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<!-- 开启 struts的开发者模式(改完这个配置文件可以不需要重启tomcat)-->
+	<constant name="struts.devMode" value="true" />
+	<!-- 设置拦截器上传文件的最大大小 -->
+	<constant name="struts.multipart.maxSize" value="5242880" />
+	
+	<package name="bookStore" extends="struts-default" namespace="/" strict-method-invocation="false">
+		
+		<!-- 全局逻辑视图 -->
+		<global-results>
+			<result name="index" type="redirect">/index.jsp</result>
+			<result name="login" >/jsp/user/login.jsp</result>
+			<result name="goodsListUI">/jsp/user/goodsList.jsp</result>
+			<result name="detailsUI">/jsp/user/details.jsp</result>
+			<result name="informationUI">/jsp/user/userInformation.jsp</result>
+			<result name="shoppingCartUI">/jsp/user/shoppingCart.jsp</result>
+		</global-results>		
+		
+		<!-- user逻辑视图 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registerUI">/jsp/user/register.jsp</result>
+			<result name="changePasswordUI">/jsp/user/changePassword.jsp</result>
+		</action> 
+		
+		<!-- category逻辑视图 -->
+		<action name="category_*" class="categoryAction" method="{1}">
+		
+		</action> 
+		
+		<!-- book逻辑视图 -->
+		<action name="book_*" class="bookAction" method="{1}">
+		
+		</action> 
+		
+		<!-- shoppingCart逻辑视图 -->
+		<action name="shoppingCart_*" class="shoppingCartAction" method="{1}">
+			<result name="shoppingCartUI">/jsp/user/shoppingCart.jsp</result>
+		</action> 
+		
+	</package>
+	
+</struts>

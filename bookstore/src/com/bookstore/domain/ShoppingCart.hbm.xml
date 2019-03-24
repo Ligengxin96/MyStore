@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bookstore.domain.ShoppingCart" table="shoppingcart">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		 
+		 <many-to-one name="user" class="com.bookstore.domain.User" column="userId" />
+         <many-to-one name="book" class="com.bookstore.domain.Book" column="bookId"/>
+		
+		<property name="quantity" column="quantity"/>
+		
+	</class>
+</hibernate-mapping>

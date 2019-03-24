@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bookstore.domain.OrderItem" table="orderitem">
+		<id name="orderItemId" column="orderItemId">
+			<generator class="uuid2" />
+		</id>
+		
+		<property name="quantity" column="quantity"/>
+		<property name="subtotal" column="subtotal"/>
+		<property name="bookId" column="bookId"/>
+		<property name="bookName" column="bookName"/>
+		<property name="currentPrice" column="currentPrice"/>
+		<property name="image" column="image"/>
+		<property name="orderID" column="orderID"/>
+		
+	</class>
+</hibernate-mapping>
