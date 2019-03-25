@@ -42,12 +42,17 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	//使用set方法接收当前页(currPage)和输入的书名(serchBookName)
 	private Integer currPage;
 	private String serchBookName;
+	private Long serchCategory;
 	public void setCurrPage(Integer currPage) {
 		this.currPage = currPage;
 	}
 	public void setSerchBookName(String serchBookName) {
 		this.serchBookName = serchBookName;
 	}
+	public void setSerchCategory(Long serchCategory) {
+		this.serchCategory = serchCategory;
+	}
+	
 
 	/*public void setPageSize(Integer pageSize) {
 	this.pageSize = pageSize;
@@ -75,8 +80,11 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	 * @throws IOException
 	 */
 	public String findAllBooks() throws IOException {
-		if(serchBookName !=null && !"".equals(serchBookName)) {
+		if(serchBookName != null && !"".equals(serchBookName)) {
 			criteria.add(Restrictions.like("bookName", "%"+serchBookName+"%"));
+		}
+		if(serchCategory != null) {
+			criteria.add(Restrictions.eq("categoryID", serchCategory));
 		}
 		PageBean<Book> pageBean = bookService.findByPage(criteria, currPage, pageSize);
 		List<Book> booksList = pageBean.getList();
@@ -99,13 +107,15 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		if(serchBookName !=null && !"".equals(serchBookName)) {
 			criteria.add(Restrictions.like("bookName", "%"+serchBookName+"%"));
 		}	
+		if(serchCategory != null) {
+			criteria.add(Restrictions.eq("categoryID", serchCategory));
+		}
 		int bookCount = bookService.findBookCount(criteria);
 		
 		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().println(bookCount);
 		return NONE;
 	}
-	
 	
 	/**
 	 * 根据书名查找书籍

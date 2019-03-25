@@ -2,10 +2,8 @@ package com.bookstore.web.action;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -17,9 +15,6 @@ import com.bookstore.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JsonConfig;
 
 public class UserAction extends ActionSupport implements ModelDriven<User> {
 	private static final long serialVersionUID = 1L;
@@ -177,11 +172,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		}
 	}
 	
-	/**
+/*	*//**
 	 * 查询所有用户然后转JSON输出
 	 * @return NONE
 	 * @throws IOException
-	 */
+	 *//*
 	public String findAllUsers() throws IOException {
 		//调用业务层
 		List<User> usersList = userService.findAllUsers(criteria);
@@ -195,7 +190,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
 		
 		return NONE;
-	}
+	}*/
 	
 }
 

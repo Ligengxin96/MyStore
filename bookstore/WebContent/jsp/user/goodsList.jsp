@@ -15,10 +15,24 @@
   
 <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
 <script src="./res/layui/layui.js" charset="utf-8"></script>
-<script>
 
+<script type="text/javascript">
+//异步查询书的总数
+ $(function() {
+ 	$.post("book_findBookCount.action",{"serchBookName": $("#bookName").val(),"serchCategory":window.sessionStorage.getItem("category")},function(data){
+ 		window.sessionStorage.setItem("bookCount",data);
+ 	},"json") ;
+ });
+</script>
+
+<script>
     $(document).on('click', '.sort a', function(){		
       $(this).addClass('active').siblings().removeClass('active');
+    })
+    $(document).on('click', '.list-box dd a', function(){		
+    	var category = $(this).attr("id");
+    	window.sessionStorage.setItem("category",category);
+    	location.reload();
     })
     $(document).on('click', '.list-box dt', function(){	
       if($(this).attr('off')){
@@ -30,15 +44,6 @@
       }
 
 });
-</script>
-
- <script type="text/javascript">
-//异步查询书的总数
- $(function() {
- 	$.post("book_findBookCount.action",{"serchBookName": $("#bookName").val(),"categoryName": $("#categoryName").val()},function(data){
- 		window.sessionStorage.setItem("bookCount",data);
- 	},"json") ;
- });
 </script>
 
 <script type="text/javascript">
@@ -54,7 +59,7 @@ $(function() {
 			}
           
           if(n.pid > 0){
-        	  $("#"+n.pid).append("<dd id="+n.categoryId+" style=\"display: none;\"><a href=\"\">"+n.categoryName+"</a></dd>");
+        	  $("#"+n.pid).append("<dd style=\"display: none;\"><a herf=\"seByCa\" id=\""+n.categoryId+"\">"+n.categoryName+"</a></dd>");
           }
          
 		}); 
@@ -66,7 +71,6 @@ $(function() {
 
 <script>
 //分页显示所有图书
-
 layui.use(['laypage', 'layer'], function(){
   var laypage = layui.laypage
   ,layer = layui.layer;
@@ -77,14 +81,14 @@ layui.use(['laypage', 'layer'], function(){
     ,jump: function(obj){
     	$.ajax({
     		 url :'book_findAllBooks.action',
-    		 data:{"currPage":obj.curr,"serchBookName":$("#bookName").val(),"categoryName": $("#categoryName").val()},
+    		 data:{"currPage":obj.curr,"serchBookName":$("#bookName").val(),"serchCategory":window.sessionStorage.getItem("category")},
 			 cache : false,
 			 async : true,
 		     type : "POST",
 			 dataType : 'json',
 	        success : function (data){	
 	 		$("#list-cont").empty();
-	 		//window.sessionStorage.removeItem("serchBookName");
+	 		//window.sessionStorage.removeItem("category");
 			$(data).each(function(i, n) {
 				$("#list-cont").append(
 			   "<div class=\"item\">"+
@@ -99,7 +103,7 @@ layui.use(['laypage', 'layer'], function(){
 	             "</p>"+
 	           "</div>"+
 	         "</div>");
-			}); 
+			});
 	    }
   		});
     }
@@ -118,11 +122,19 @@ $("#searchBook").click(function() {
 }); 
 </script>
 
-<script>
-
-$("#1").find("dd").click(function(){
-	alert($(this).attr("value"));
+<script type="text/javascript">
+$(document).on('click', '.list-box dd a', function(){		
+	var category = $(this).attr("id");
+	window.sessionStorage.setItem("category",category);
+	location.reload();
 });
+</script>
+
+<script type="text/javascript">
+	function removeAttr() {
+	window.sessionStorage.removeItem("category");
+	window.location.href="book_goodsListUI.action";
+}
 </script>
 
 </head>
@@ -174,7 +186,7 @@ $("#1").find("dd").click(function(){
       <div class="inner-cont0">
         <div class="inner-cont1 w1200">
           <div class="inner-cont2">
-           <a href="book_goodsListUI.action" class="active">所有商品</a>
+           <a href="" onclick="removeAttr()"  class="active">所有商品</a>
            <a href="buytoday.html">今日团购</a>
            <a href="information.html">图书资讯</a>
            <a href="about.html">关于我们</a>
