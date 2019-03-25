@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bookstoreBackstage.domain.Book" table="book">
+		<id name="bookId" column="bookId">
+			<generator class="uuid2" />
+		</id>
+		
+		<property name="bookName" column="bookName"/>
+		<property name="author" column="author"/>
+		<property name="price" column="price"/>
+		<property name="currentPrice" column="currentPrice"/>
+		<property name="discount" column="discount"/>
+		<property name="ISBN" column="ISBN"/>
+		<property name="press" column="press"/>
+		<property name="edition" column="edition"/>
+		<property name="smallImage" column="smallImage"/>
+		<property name="bigImage" column="bigImage"/>
+		<property name="categoryID" column="categoryID"/>
+		
+	</class>
+</hibernate-mapping>

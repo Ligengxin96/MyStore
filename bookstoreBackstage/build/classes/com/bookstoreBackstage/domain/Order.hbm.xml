@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bookstoreBackstage.domain.Order" table="order">
+		<id name="orderId" column="orderId">
+			<generator class="uuid2" />
+		</id>
+		
+		<property name="orderTime" column="orderTime"/>
+		<property name="orderStatus" column="orderStatus"/>
+		<property name="address" column="address"/>
+		<property name="userID" column="userID"/>
+		
+	</class>
+</hibernate-mapping>
