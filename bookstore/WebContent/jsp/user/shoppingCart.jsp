@@ -14,7 +14,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 </head>
 <body>
-<s:debug></s:debug>
   <div class="site-nav-bg">
     <div class="site-nav w1200">
       <p class="sn-back-home">

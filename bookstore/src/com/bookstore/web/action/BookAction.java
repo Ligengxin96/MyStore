@@ -52,8 +52,6 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public void setSerchCategory(Long serchCategory) {
 		this.serchCategory = serchCategory;
 	}
-	
-
 	/*public void setPageSize(Integer pageSize) {
 	this.pageSize = pageSize;
 	}*/

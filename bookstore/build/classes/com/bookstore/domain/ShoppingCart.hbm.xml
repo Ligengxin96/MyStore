@@ -8,9 +8,12 @@
 			<generator class="native"/>
 		</id>
 		 
-		 <many-to-one name="user" class="com.bookstore.domain.User" column="userId" />
+		<!--  <many-to-one name="user" class="com.bookstore.domain.User" column="userId" />
          <many-to-one name="book" class="com.bookstore.domain.Book" column="bookId"/>
 		
+		 -->
+		<property name="userID" column="userID"/>
+		<property name="bookID" column="bookID"/>
 		<property name="quantity" column="quantity"/>
 		
 	</class>

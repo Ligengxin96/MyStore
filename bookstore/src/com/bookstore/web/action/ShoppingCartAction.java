@@ -22,14 +22,11 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 
 	//获取购买的书籍信息和加入购物车的书籍数量
 	private String bookId;
-	private String bookCount;
+	private Long bookCount;
 	public void setBookId(String bookId) {
 		this.bookId = bookId;
 	}
-	public String getBookCount() {
-		return bookCount;
-	}
-	public void setBookCount(String bookCount) {
+	public void setBookCount(Long bookCount) {
 		this.bookCount = bookCount;
 	}
 
@@ -47,9 +44,18 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	
 	public String addBooktoCart() {
 		User user = (User) ActionContext.getContext().getSession().get("user");
-		//System.out.println(user.getUserId());
-		System.out.println(bookId);
-		System.out.println(bookCount);
+		if(user == null) {
+			return LOGIN;
+		}
+		System.out.println("userid="+user.getUserId());
+		System.out.println("bookid="+bookId);
+		System.out.println("bookCount="+bookCount);
+		
+		shoppingCart.setUserID(user.getUserId());
+		shoppingCart.setBookID(bookId);
+		shoppingCart.setQuantity(bookCount);
+		shoppingCartService.save(shoppingCart);
+		
 		return "shoppingCartUI";
 	}
 	

@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="./res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="./res/layui/css/layui.css">
   <script type="text/javascript" src="./res/layui/layui.js"></script>
+  <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
@@ -35,10 +36,10 @@
 </script>
 
 <script type="text/javascript">
-
-$(function name() {
-	
-})
+function addBooktoCart() {
+	var bookCount = $('.number-cont input').val();
+	window.location.href="shoppingCart_addBooktoCart.action?bookId=${bookId}&bookCount="+bookCount;
+}
 </script>
 
 </head>
@@ -139,7 +140,7 @@ $(function name() {
             <div class="choose-btns">
               <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
            
-             <a href="shoppingCart_addBooktoCart.action?bookId=${bookId}"><button class="layui-btn  layui-btn-danger car-btn"><i class="layui-icon layui-icon-cart-simple"></i>加入购物车</button>  </a>
+             <a onclick="addBooktoCart()" ><button class="layui-btn  layui-btn-danger car-btn"><i class="layui-icon layui-icon-cart-simple"></i>加入购物车</button>  </a>
             </div>
           </div>
         </div>

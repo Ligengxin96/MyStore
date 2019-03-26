@@ -11,6 +11,7 @@ import com.bookstore.service.ShoppingCartService;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
+	//属性注入shoppingCartDao
 	@Resource(name="shoppingCartDao")
 	private ShoppingCartDao shoppingCartDao;
 

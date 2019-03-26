@@ -11,8 +11,8 @@ public class ShoppingCart implements Serializable{
 	private String bookID;
 	private String userID;
 	
-	private User user;
-	private Book book;
+	/*private User user;
+	private Book book;*/
 	
 	//购物车关联书籍
 
@@ -48,7 +48,7 @@ public class ShoppingCart implements Serializable{
 		this.id = id;
 	}
 
-	public User getUser() {
+	/*public User getUser() {
 		return user;
 	}
 
@@ -63,7 +63,7 @@ public class ShoppingCart implements Serializable{
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
+*/
 	
 	
 }
