@@ -1,6 +1,11 @@
 package com.bookstore.web.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import com.bookstore.domain.ShoppingCart;
 import com.bookstore.domain.User;
@@ -37,24 +42,35 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	@Resource(name="bookService")
 	private BookService bookService;
 	
+	//离线查询对象
+	private DetachedCriteria criteria = DetachedCriteria.forClass(ShoppingCart.class);
+
 	//跳转到购物车页面
 	public String shoppingCartUI() {
 		return "shoppingCartUI";
 	}
 	
-	public String addBooktoCart() {
+	//添加书籍到购物车
+	public String addBookToCart() {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		if(user == null) {
 			return LOGIN;
 		}
-		System.out.println("userid="+user.getUserId());
-		System.out.println("bookid="+bookId);
-		System.out.println("bookCount="+bookCount);
 		
-		shoppingCart.setUserID(user.getUserId());
-		shoppingCart.setBookID(bookId);
-		shoppingCart.setQuantity(bookCount);
-		shoppingCartService.save(shoppingCart);
+		//查询条件
+		criteria.add(Restrictions.eq("bookID", bookId));
+		criteria.add(Restrictions.eq("userID", user.getUserId()));
+		//判断是否存在相同的书本(相同就只添加数量)
+		List<ShoppingCart> findShoppingCartItem = shoppingCartService.findShoppingCartItem(criteria);
+		if(findShoppingCartItem.size() != 0) {
+			findShoppingCartItem.get(0).setQuantity(findShoppingCartItem.get(0).getQuantity()+bookCount);
+			shoppingCartService.updateCount(findShoppingCartItem.get(0));
+		}else {
+			shoppingCart.setUserID(user.getUserId());
+			shoppingCart.setBookID(bookId);
+			shoppingCart.setQuantity(bookCount);
+			shoppingCartService.save(shoppingCart);
+		}
 		
 		return "shoppingCartUI";
 	}

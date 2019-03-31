@@ -36,9 +36,9 @@
 </script>
 
 <script type="text/javascript">
-function addBooktoCart() {
+function addBookToCart() {
 	var bookCount = $('.number-cont input').val();
-	window.location.href="shoppingCart_addBooktoCart.action?bookId=${bookId}&bookCount="+bookCount;
+	window.location.href="shoppingCart_addBookToCart.action?bookId=${bookId}&bookCount="+bookCount;
 }
 </script>
 
@@ -140,7 +140,7 @@ function addBooktoCart() {
             <div class="choose-btns">
               <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
            
-             <a onclick="addBooktoCart()" ><button class="layui-btn  layui-btn-danger car-btn"><i class="layui-icon layui-icon-cart-simple"></i>加入购物车</button>  </a>
+             <a onclick="addBookToCart()" ><button class="layui-btn  layui-btn-danger car-btn"><i class="layui-icon layui-icon-cart-simple"></i>加入购物车</button>  </a>
             </div>
           </div>
         </div>
