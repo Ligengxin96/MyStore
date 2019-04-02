@@ -21,10 +21,10 @@
 			<one-to-many class="com.bookstore.domain.Order"/>
 		</set>
 		
-		<set name="shoppingCart" inverse="true">
+		<!-- <set name="shoppingCart" inverse="true">
            <key column="userID"/>
            <one-to-many class="com.bookstore.domain.ShoppingCart" />
-        </set>
+        </set> -->
 		
 	</class>
 </hibernate-mapping>

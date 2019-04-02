@@ -49,6 +49,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return LOGIN;
 	}
 	
+	//退出登陆
+	public String logoutUI() {
+		ActionContext.getContext().getSession().remove("user");
+		return LOGIN;
+	}
+	
 	//跳转注册页面
 	public String registerUI() {
 		return "registerUI";

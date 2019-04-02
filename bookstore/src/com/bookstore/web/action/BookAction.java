@@ -18,6 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	private static final long serialVersionUID = 1L;
@@ -88,7 +89,10 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		List<Book> booksList = pageBean.getList();
 
 		//list对象转为json数据
-		JSONArray jsonArray = JSONArray.fromObject(booksList);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] {"shoppingCart"});
+		JSONArray jsonArray = JSONArray.fromObject(booksList,jsonConfig);
+		
 		//回显到页面
 		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());

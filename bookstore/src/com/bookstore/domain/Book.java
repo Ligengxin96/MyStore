@@ -18,7 +18,7 @@ public class Book {
 	private String bigImage;
 	private Long categoryID;
 	
-	private Set<ShoppingCart> shoppingCart =new HashSet<ShoppingCart>();
+	//private Set<ShoppingCart> shoppingCart =new HashSet<ShoppingCart>();
 	
 	public String getBookId() {
 		return bookId;
@@ -116,13 +116,13 @@ public class Book {
 		this.categoryID = categoryID;
 	}
 
-	public Set<ShoppingCart> getShoppingCart() {
+	/*public Set<ShoppingCart> getShoppingCart() {
 		return shoppingCart;
 	}
 
 	public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
 		this.shoppingCart = shoppingCart;
-	}
+	}*/
 
 
 }

@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 public class CategoryAction extends ActionSupport implements ModelDriven<Category>{
 	private static final long serialVersionUID = 1L;
@@ -39,7 +40,9 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
 	public String findCategory() throws IOException {
 		List<Category> categoryList = categoryService.findCategory(criteria);
 		//list对象转为json数据
-		JSONArray jsonArray = JSONArray.fromObject(categoryList);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] {"books"});
+		JSONArray jsonArray = JSONArray.fromObject(categoryList,jsonConfig);
 		//回显到页面
 		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());

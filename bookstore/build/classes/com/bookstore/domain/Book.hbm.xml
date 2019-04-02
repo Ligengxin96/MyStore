@@ -20,10 +20,10 @@
 		<property name="bigImage" column="bigImage"/>
 		<property name="categoryID" column="categoryID"/>
 		
-		<set name="shoppingCart" inverse="true">
+		<!-- <set name="shoppingCart" inverse="true">
            <key column="bookID"/>
            <one-to-many class="com.bookstore.domain.ShoppingCart" />
-        </set>
+        </set> -->
 		
 	</class>
 </hibernate-mapping>

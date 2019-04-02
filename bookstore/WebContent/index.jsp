@@ -28,13 +28,16 @@
       <div class="sn-quick-menu">
         <div class="login">
         	<s:if test="#session.user != null">
-        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/></a>	
+        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp&nbsp</a>
+        	</s:if>
+        	<s:if test="#session.user != null">
+        		<a href="user_logoutUI.action"><font color="black">安全退出</font></a>	
         	</s:if>
         	<s:if test="#session.user == null">
         		<a href="user_loginUI.action">登录</a>
         	</s:if>
         </div>
-        <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+        <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span>2</span></div>
       </div>
     </div>
   </div>
