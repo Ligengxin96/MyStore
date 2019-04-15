@@ -28,7 +28,7 @@
       <div class="sn-quick-menu">
         <div class="login">
         	<s:if test="#session.user != null">
-        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp&nbsp</a>
+        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp;&nbsp;</a>
         	</s:if>
         	<s:if test="#session.user != null">
         		<a href="user_logoutUI.action"><font color="black">安全退出</font></a>	

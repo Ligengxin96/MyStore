@@ -88,7 +88,7 @@ layui.use(['laypage', 'layer'], function(){
 			 dataType : 'json',
 	        success : function (data){	
 	 		$("#list-cont").empty();
-	 		//window.sessionStorage.removeItem("category");
+	 		//window.sessionStoorage.removeItem("category");
 			$(data).each(function(i, n) {
 				$("#list-cont").append(
 			   "<div class=\"item\">"+
@@ -148,7 +148,7 @@ $(document).on('click', '.list-box dd a', function(){
       <div class="sn-quick-menu">
         <div class="login">
 			<s:if test="#session.user != null">
-        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp&nbsp</a>	
+        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp;&nbsp;</a>	
         	</s:if>
         	<s:if test="#session.user != null">
         		<a href="user_logoutUI.action"><font color="black">安全退出</font></a>	

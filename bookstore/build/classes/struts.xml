@@ -40,6 +40,7 @@
 		<!-- shoppingCart逻辑视图 -->
 		<action name="shoppingCart_*" class="shoppingCartAction" method="{1}">
 			<result name="shoppingCartUI">/jsp/user/shoppingCart.jsp</result>
+			<result name="emptyUI">/jsp/user/emptyShoppingCart.jsp</result>
 		</action> 
 		
 	</package>

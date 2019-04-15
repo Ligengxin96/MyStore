@@ -1,9 +1,3 @@
-/*
-*@Name: 母婴商城
-*@Author: xuzhiwen
-*@Copyright:layui.com
-*/
-
 layui.define(['layer'],function(exports){
 	var layer = layui.layer;
 	
@@ -25,7 +19,7 @@ var car = {
               }
       		}
           SelectedPieces.innerHTML = seleted;
-          piecesTotal.innerHTML = '￥' + price.toFixed(2);
+          piecesTotal.innerHTML = '￥' + price.toFixed(1);
       }
 
       function fn1(){
@@ -33,10 +27,10 @@ var car = {
       }
       // 小计
       function getSubTotal(ul){
-        var unitprice = parseFloat(ul.getElementsByClassName('th-su')[0].innerHTML);
-        var count = parseInt(ul.getElementsByClassName('Quantity-input')[0].value);
-        var SubTotal = parseFloat(unitprice*count)
-        ul.getElementsByClassName('sum')[0].innerHTML = SubTotal.toFixed(2);
+        var unitprice = parseFloat(ul.getElementsByClassName('th-su')[0].innerHTML);//单价
+        var count = parseInt(ul.getElementsByClassName('Quantity-input')[0].value); //数量
+        var SubTotal = parseFloat(unitprice*count); //小计
+        ul.getElementsByClassName('sum')[0].innerHTML = SubTotal.toFixed(1);
       }
 
       for(var i = 0;i < checkInputs.length;i++){
@@ -64,14 +58,18 @@ var car = {
           var less = this.getElementsByClassName('less')[0];
           var val = parseInt(input.value);
           var that = this;
+          var bookId =  $(input).attr("bookId");
           switch(cls){
             case 'add layui-btn':
               input.value = val + 1;
+              window.location.href="shoppingCart_updateCount.action?bookCount="+input.value+"&bookId="+bookId;
               getSubTotal(this)
               break;
             case 'less layui-btn':
               if(val > 1){
                 input.value = val - 1;
+                var bookId =  $(input).attr("bookId");
+                window.location.href="shoppingCart_updateCount.action?bookCount="+input.value+"&bookId="+bookId;
               }
               getSubTotal(this)
               break;
@@ -79,6 +77,7 @@ var car = {
               layer.confirm('你确定要删除吗',{
                 yes:function(index,layero){
                   layer.close(index)
+                  window.location.href="shoppingCart_deleteItem.action?bookId="+bookId;
                   that.parentNode.removeChild(that);
                 }
               })
@@ -92,13 +91,26 @@ var car = {
           layer.confirm('你确定要删除吗',{
             yes:function(index,layero){
               layer.close(index)
+               var bookIDs = []; 
               for(var i = 0;i < uls.length;i++){
                 var input = uls[i].getElementsByTagName('input')[0];
                 if(input.checked){
+                	var bookID = $(input).attr("bookID");
+                	bookIDs.push(bookID);
                   uls[i].parentNode.removeChild(uls[i]); 
                   i--;
                 }
               }
+              var params = $.param({'bookIDs':bookIDs},true);
+          	  var url = 'shoppingCart_batchDeleteItem.action';
+              $.ajax({
+  		        url : url,
+  		        data: params,
+  		        cache : false, 
+  		        async : false,
+  		        type : "POST",
+  		        dataType : 'json',
+               });
               getTotal() 
             }
 

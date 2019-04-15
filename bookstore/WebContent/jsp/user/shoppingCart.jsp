@@ -16,16 +16,19 @@
 </head>
 
 <script type="text/javascript">
- //异步查询图书分类
+//查询用户购物车的书籍
 $(function() {
 	$.post("shoppingCart_showItem.action",{},function(data){
+		if (data == '') {
+			window.location.href="shoppingCart_emptyUI.action";
+		}else {
 		 $(data).each(function(i, n) {
 			$("#list-cont").append(
 					"<ul class=\"item-content layui-clear\">"+
 		            "<li class=\"th th-chk\">"+
 		              "<div class=\"select-all\">"+
 		                "<div class=\"cart-checkbox\">"+
-		                  "<input class=\"CheckBoxShop check\" id=\"\" type=\"checkbox\" num=\"all\" name=\"select-all\" value=\"true\">"+
+		                  "<input class=\"CheckBoxShop check\" bookID=\""+n.bookID+"\" type=\"checkbox\" num=\"all\" name=\"select-all\" value=\"true\">"+
 		                "</div>"+
 		              "</div>"+
 		            "</li>"+
@@ -42,26 +45,25 @@ $(function() {
 		            "</li>"+
 		            "<li class=\"th th-amount\">"+
 		              "<div class=\"box-btn layui-clear\">"+
-		                "<div class=\"less layui-btn\">-</div>"+
-		                "<input class=\"Quantity-input\" type=\"\" name=\"\" value=\""+n.quantity+"\" disabled=\"disabled\">"+
-		                "<div class=\"add layui-btn\">+</div>"+
+		                "<div class=\"less layui-btn\"  >-</div>"+
+		                "<input class=\"Quantity-input\" type=\"text\" bookId=\""+n.bookID+"\" name=\"\" value=\""+n.quantity+"\"  disabled=\"disabled\">"+
+		                "<div class=\"add layui-btn\" >+</div>"+
 		              "</div>"+
 		            "</li>"+
 		            "<li class=\"th th-sum\">"+
-		              "<span class=\"sum\">"+n.currentPrice*n.quantity+"</span>"+
+		              "<span class=\"sum\">"+(n.currentPrice*n.quantity).toFixed(1)+"</span>"+
 		            "</li>"+
 		            "<li class=\"th th-op\">"+
-		              "<a href=\"javascript:;\"><span class=\"dele-btn\" >删除</span></a>"+
+		              "<span class=\"dele-btn\" >删除</span>"+
 		            "</li>"+
 		          "</ul>" 
 		          )
 		}); 
-		 
+		}
 	},"json") ;
 });
  
 </script>
-
 
 <body>
   <div class="site-nav-bg">
@@ -73,7 +75,7 @@ $(function() {
       <div class="sn-quick-menu">
         <div class="login">
         	<s:if test="#session.user != null">
-        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp&nbsp</a>	
+        		<a href="user_informationUI.action">欢迎你,<s:property value="#session.user.username"/>&nbsp;&nbsp;</a>	
         	</s:if>
         	<s:if test="#session.user != null">
         		<a href="user_logoutUI.action"><font color="black">安全退出</font></a>	
