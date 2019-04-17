@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class Order {
 
-	private String orderId;
+	private Long orderId;
 	private Date orderTime;
-	private Long orderStatus;
+	private String orderStatus;
 	private String address;
 	private String userID;
 	
 	private OrderItem orderItem;
 	
-	public String getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(String orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 	public Date getOrderTime() {
@@ -24,10 +24,10 @@ public class Order {
 	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
 	}
-	public Long getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
-	public void setOrderStatus(Long orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 	public String getAddress() {

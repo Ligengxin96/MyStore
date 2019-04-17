@@ -33,5 +33,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		shoppingCartDao.update(shoppingCart);
 	}
 
+	@Override
+	public void deleteItem(ShoppingCart shoppingCart) {
+		shoppingCartDao.delete(shoppingCart);
+	}
+
 
 }

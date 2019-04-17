@@ -22,7 +22,13 @@ public interface ShoppingCartService {
 
 	/**
 	 * 修改购物车的书本的数量
-	 * @param shoppingCart shoppingCart对象
+	 * @param shoppingCart 购物车对象
 	 */
 	public void updateCount(ShoppingCart shoppingCart);
+
+	/**
+	 * 删除购物车
+	 * @param shoppingCart 购物车对象
+	 */
+	public void deleteItem(ShoppingCart shoppingCart);
 }

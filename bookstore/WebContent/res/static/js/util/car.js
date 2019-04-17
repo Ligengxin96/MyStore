@@ -112,6 +112,7 @@ var car = {
   		        dataType : 'json',
                });
               getTotal() 
+              window.location.href="shoppingCart_shoppingCartUI.action";
             }
 
           })

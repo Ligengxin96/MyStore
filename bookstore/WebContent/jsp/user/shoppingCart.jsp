@@ -65,6 +65,47 @@ $(function() {
  
 </script>
 
+<script type="text/javascript">
+function calculation() {
+	var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
+	var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
+	var checkAll = document.getElementsByClassName('check-all'); //全选框
+	var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数
+	var piecesTotal = document.getElementsByClassName('pieces-total')[0];//总价
+	var batchdeletion = document.getElementsByClassName('batch-deletion')[0]//批量删除按钮
+	
+    if(SelectedPieces.innerHTML != 0){
+           var bookIDs = [];
+           var quantities = [];
+          for(var i = 0;i < uls.length;i++){
+            var input = uls[i].getElementsByTagName('input')[0];
+            if(input.checked){
+            	var bookID = $(input).attr("bookID");
+            	bookIDs.push(bookID);
+            	var quantityInput = uls[i].getElementsByClassName('Quantity-input')[0];
+            	bookIDs.push(quantityInput.value);
+              uls[i].parentNode.removeChild(uls[i]); 
+              i--;
+            }
+          }
+          var params = $.param({'bookIDs':bookIDs},true);
+      	  var url = 'order_produceOrder.action';
+          $.ajax({
+		        url : url,
+		        data: params,
+		        cache : false, 
+		        async : false,
+		        type : "POST",
+		        dataType : 'json',
+           });
+    }else{
+      layer.msg('请选择商品')
+    }
+    
+  
+}
+</script>
+
 <body>
   <div class="site-nav-bg">
     <div class="site-nav w1200">
@@ -172,7 +213,7 @@ $(function() {
           <span class="batch-dele-btn">批量删除</span>
         </div>
         <div class="th Settlement">
-          <button class="layui-btn">结算</button>
+          <button class="layui-btn" onclick="calculation()" >结算</button>
         </div>
         <div class="th total">
           <p>应付：<span class="pieces-total">0</span></p>

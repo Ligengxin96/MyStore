@@ -16,10 +16,10 @@
 		<property name="money" column="money"/>
 		<property name="userStatus" column="userStatus"/>
 		
-		<set name="orders" inverse="true">
+		<!-- <set name="orders" inverse="true" cascade="save-update">
 			<key column="userID"/>
 			<one-to-many class="com.bookstore.domain.Order"/>
-		</set>
+		</set> -->
 		
 		<!-- <set name="shoppingCart" inverse="true">
            <key column="userID"/>

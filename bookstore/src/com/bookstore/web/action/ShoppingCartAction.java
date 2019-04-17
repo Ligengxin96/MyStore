@@ -1,7 +1,5 @@
 package com.bookstore.web.action;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -59,6 +57,11 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	private DetachedCriteria criteria = DetachedCriteria.forClass(ShoppingCart.class);
 	private DetachedCriteria bookCriteria = DetachedCriteria.forClass(Book.class);
 
+	//跳转到空白页面
+	public String emptyUI() {
+		return "emptyUI";
+	}
+	
 	//跳转到购物车页面
 	public String shoppingCartUI() {
 		User user = (User) ActionContext.getContext().getSession().get("user");
@@ -68,12 +71,6 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 			return "shoppingCartUI";
 		}
 	}
-	
-	//跳转到空白页面
-	public String emptyUI() {
-		return "emptyUI";
-	}
-	
 	
 	/**
 	 * 添加商品到购物车
@@ -143,9 +140,10 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		criteria.add(Restrictions.eq("userID", user.getUserId()));
 		criteria.add(Restrictions.eq("bookID", bookId));
+		//先查询在删除
 		List<ShoppingCart> shoppingCartList = shoppingCartService.findShoppingCartItem(criteria);
 		
-		System.out.println(shoppingCartList.get(0).getBookName());
+		shoppingCartService.deleteItem(shoppingCartList.get(0));
 		
 		return "shoppingCartUI";
 	}
@@ -155,14 +153,16 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	 * @return
 	 */
 	public String batchDeleteItem() {
-		System.out.println(bookIDs.toString());
-		/*User user = (User) ActionContext.getContext().getSession().get("user");
-		criteria.add(Restrictions.eq("userID", user.getUserId()));
-		criteria.add(Restrictions.eq("bookID", bookId));
-		List<ShoppingCart> shoppingCartList = shoppingCartService.findShoppingCartItem(criteria);
-		
-		System.out.println(shoppingCartList.get(0).getBookName());*/
-		
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		//逐一遍历选择的书籍id,一个个删除
+		for(int i = 0;i < bookIDs.size();i++) {
+			criteria = DetachedCriteria.forClass(ShoppingCart.class);
+			//添加新的条件
+			criteria.add(Restrictions.eq("userID", user.getUserId()));
+			criteria.add(Restrictions.eq("bookID", bookIDs.get(i)));
+			List<ShoppingCart> shoppingCartList = shoppingCartService.findShoppingCartItem(criteria);
+			shoppingCartService.deleteItem(shoppingCartList.get(0));
+		}	
 		return "shoppingCartUI";
 	}
 	

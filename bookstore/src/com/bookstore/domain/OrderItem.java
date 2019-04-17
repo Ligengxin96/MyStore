@@ -9,7 +9,7 @@ public class OrderItem {
 	private String bookName;
 	private Long currentPrice;
 	private String image;
-	private String orderID;
+	private Long orderID;
 	
 	public String getOrderItemId() {
 		return orderItemId;
@@ -53,10 +53,10 @@ public class OrderItem {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getorderID() {
+	public Long getorderID() {
 		return orderID;
 	}
-	public void setorderID(String orderID) {
+	public void setorderID(Long orderID) {
 		this.orderID = orderID;
 	}
 	

@@ -3,9 +3,9 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.bookstore.domain.Order" table="order">
+	<class name="com.bookstore.domain.Order" table="orders">
 		<id name="orderId" column="orderId">
-			<generator class="uuid2" />
+			<generator class="native" />
 		</id>
 		
 		<property name="orderTime" column="orderTime"/>
@@ -13,5 +13,6 @@
 		<property name="address" column="address"/>
 		<property name="userID" column="userID"/>
 		
+		<!-- <many-to-one name="user" class="com.bookstore.domain.User" column="userID"/> -->
 	</class>
 </hibernate-mapping>

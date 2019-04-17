@@ -43,6 +43,11 @@
 			<result name="emptyUI">/jsp/user/emptyShoppingCart.jsp</result>
 		</action> 
 		
+		<!-- order逻辑视图 -->
+		<action name="order_*" class="orderAction" method="{1}">
+		
+		</action> 
+		
 	</package>
 	
 </struts>
