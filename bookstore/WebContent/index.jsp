@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Protoss书城</title>
+  <link rel="icon" href="./res/static/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="./res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="./res/layui/css/layui.css">
   <script type="text/javascript" src="./res/layui/layui.js"></script>
@@ -37,7 +38,7 @@
         		<a href="user_loginUI.action">登录</a>
         	</s:if>
         </div>
-        <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span>2</span></div>
+        <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span></span></div>
       </div>
     </div>
   </div>

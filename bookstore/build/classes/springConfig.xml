@@ -33,7 +33,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
@@ -98,6 +98,13 @@
 	<bean id="orderService" class="com.bookstore.service.impl.OrderServiceImpl"></bean>
 	
 	<bean id="orderDao" class="com.bookstore.dao.impl.OrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 配置orderItem -->
+	<bean id="orderItemAction" class="com.bookstore.web.action.OrderItemAction" scope="prototype"></bean>
+	<bean id="orderItemService" class="com.bookstore.service.impl.OrderItemServiceImpl"></bean>
+	<bean id="orderItemDao" class="com.bookstore.dao.impl.OrderItemDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	

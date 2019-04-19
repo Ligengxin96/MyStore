@@ -5,7 +5,7 @@
 <hibernate-mapping>
 	<class name="com.bookstore.domain.Order" table="orders">
 		<id name="orderId" column="orderId">
-			<generator class="native" />
+			<generator class="uuid2" />
 		</id>
 		
 		<property name="orderTime" column="orderTime"/>

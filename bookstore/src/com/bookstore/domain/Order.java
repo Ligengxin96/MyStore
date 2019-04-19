@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Order {
 
-	private Long orderId;
+	private String orderId;
 	private Date orderTime;
 	private String orderStatus;
 	private String address;
@@ -12,10 +12,10 @@ public class Order {
 	
 	private OrderItem orderItem;
 	
-	public Long getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(Long orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 	public Date getOrderTime() {

@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <title>商品详情</title>
+  <link rel="icon" href="./res/static/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="./res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="./res/layui/css/layui.css">
   <script type="text/javascript" src="./res/layui/layui.js"></script>
@@ -38,7 +39,17 @@
 <script type="text/javascript">
 function addBookToCart() {
 	var bookCount = $('.number-cont input').val();
-	window.location.href="shoppingCart_addBookToCart.action?bookId=${bookId}&bookCount="+bookCount;
+	var bookId = ${bookId};
+	 $.ajax({
+	        url : 'shoppingCart_addBookToCart.action',
+	        data: {"bookCount":bookCount,"bookId":bookId},
+	        cache : false, 
+	        async : false,
+	        type : "POST",
+	        dataType : 'json',
+    });
+	alert("加入购物车成功");
+	//window.location.href="shoppingCart_addBookToCart.action?bookId=${bookId}&bookCount="+bookCount;
 }
 </script>
 
@@ -62,7 +73,7 @@ function addBookToCart() {
         		<a href="user_loginUI.action">登录</a>
         	</s:if>
 		</div>
-         <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span>2</span></div>
+         <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span></span></div>
       </div>
     </div>
   </div>

@@ -4,12 +4,12 @@ public class OrderItem {
 
 	private String orderItemId;
 	private Long  quantity;
-	private Long subtotal;
+	private Double subtotal;
 	private String bookId;
 	private String bookName;
-	private Long currentPrice;
+	private Double currentPrice;
 	private String image;
-	private Long orderID;
+	private String orderID;
 	
 	public String getOrderItemId() {
 		return orderItemId;
@@ -23,10 +23,10 @@ public class OrderItem {
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
-	public Long getSubtotal() {
+	public Double getSubtotal() {
 		return subtotal;
 	}
-	public void setSubtotal(Long subtotal) {
+	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
 	public String getBookId() {
@@ -41,10 +41,10 @@ public class OrderItem {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public Long getCurrentPrice() {
+	public Double getCurrentPrice() {
 		return currentPrice;
 	}
-	public void setCurrentPrice(Long currentPrice) {
+	public void setCurrentPrice(Double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 	public String getImage() {
@@ -53,10 +53,10 @@ public class OrderItem {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public Long getorderID() {
+	public String getorderID() {
 		return orderID;
 	}
-	public void setorderID(Long orderID) {
+	public void setorderID(String orderID) {
 		this.orderID = orderID;
 	}
 	

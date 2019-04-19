@@ -18,7 +18,7 @@ public class User {
 	//private Set<ShoppingCart> shoppingCart =new HashSet<ShoppingCart>();
 	
 	//用户关联订单
-	private Set<Order> orders = new HashSet<Order>();
+	//private Set<Order> orders = new HashSet<Order>();
 	
 	public String getUserId() {
 		return userId;
@@ -72,12 +72,12 @@ public class User {
 		this.userStatus = userStatus;
 	}
 	
-	public Set<Order> getOrders() {
+	/*public Set<Order> getOrders() {
 		return orders;
 	}
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
-	}
+	}*/
 	/*public Set<ShoppingCart> getShoppingCart() {
 		return shoppingCart;
 	}

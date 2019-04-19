@@ -4,6 +4,7 @@ layui.define(['layer'],function(exports){
 var car = {
   init : function(){
   		var uls = document.getElementById('list-cont').getElementsByTagName('ul');//每一行
+  		 window.sessionStorage.setItem("shoppingCartCount",uls.length);
   		var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
       var checkAll = document.getElementsByClassName('check-all'); //全选框
       var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数

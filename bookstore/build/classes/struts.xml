@@ -2,8 +2,9 @@
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
-
+        
 <struts>
+
 	<!-- 开启 struts的开发者模式(改完这个配置文件可以不需要重启tomcat)-->
 	<constant name="struts.devMode" value="true" />
 	<!-- 设置拦截器上传文件的最大大小 -->
@@ -28,14 +29,10 @@
 		</action> 
 		
 		<!-- category逻辑视图 -->
-		<action name="category_*" class="categoryAction" method="{1}">
-		
-		</action> 
+		<action name="category_*" class="categoryAction" method="{1}"></action> 
 		
 		<!-- book逻辑视图 -->
-		<action name="book_*" class="bookAction" method="{1}">
-		
-		</action> 
+		<action name="book_*" class="bookAction" method="{1}"></action> 
 		
 		<!-- shoppingCart逻辑视图 -->
 		<action name="shoppingCart_*" class="shoppingCartAction" method="{1}">
@@ -45,7 +42,12 @@
 		
 		<!-- order逻辑视图 -->
 		<action name="order_*" class="orderAction" method="{1}">
+			<result name="myOrderUI">/jsp/user/myOrder.jsp</result>
+		</action> 
 		
+		<!-- orderItem逻辑视图 -->
+		<action name="orderItem_*" class="orderItemAction" method="{1}">
+			<result name="success">/jsp/user/userInformation.jsp</result>
 		</action> 
 		
 	</package>

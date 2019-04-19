@@ -7,13 +7,15 @@
 <head>
 <meta charset="utf-8">
 <title>个人中心</title>
+
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="./res/layui/css/layui.css"  media="all">
-	<link rel="stylesheet" type="text/css" href="./res/static/css/main.css">
-  <link rel="stylesheet" type="text/css" href="./res/layui/css/layui.css">
-  <script type="text/javascript" src="./res/layui/layui.js"></script>
+  <link rel="icon" href="../res/static/img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../res/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
+  <script type="text/javascript" src="../res/layui/layui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
@@ -65,16 +67,16 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 <fieldset class="layui-elem-field layui-field-title" style="margin-top:30px;">
   <legend>个人中心</legend>
 </fieldset>
- 
-<ul class="layui-nav">
-  <li class="layui-nav-item layui-this"><a href="">我的信息</a></li>
-  <li class="layui-nav-item "><a href="">待付款订单</a></li>
-  <li class="layui-nav-item "><a href="">待发货订单</a></li>
-  <li class="layui-nav-item "><a href="">待签收订单</a></li>
-</ul>
 
-<h1>&nbsp;&nbsp;</h1>
-<form class="layui-form" action="" >
+<div class="layui-tab">
+  <ul class="layui-tab-title">
+    <li class="layui-this">我的信息</li>
+    <li>待付款订单</li>
+    <li>待发货订单</li>
+    <li>待签收订单</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
 
    <div class="layui-form-item">
     <div class="layui-inline">
@@ -106,10 +108,33 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" lay-submit="" lay-filter="demo1">修改信息</button>
-      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
     </div>
   </div>
-</form>
+</div>
+    <div class="layui-tab-item" id="unPayOrder">
+    
+    
+    </div>
+    <div class="layui-tab-item" id="unSentOrder">
+    
+    </div>
+    <div class="layui-tab-item" id="unConfirmOrder">
+    
+    </div>
+  </div>
+</div>
+ 
+<script>
+//注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+</script>
+
+<h1>&nbsp;&nbsp;</h1>
+
 
 
 
