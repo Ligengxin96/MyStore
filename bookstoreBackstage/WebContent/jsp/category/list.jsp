@@ -15,7 +15,7 @@
 		if(page){
 			$("#page").val(page);
 		}
-		document.customerForm.submit();
+		document.categoryForm.submit();
 		
 	}
 </SCRIPT>
@@ -32,8 +32,8 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/saleVisit_findAllSaleVisits.action"
+	<FORM id="categoryForm" name="categoryForm"
+		action="${pageContext.request.contextPath }/category_findAllCategories.action"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -69,18 +69,7 @@
 									<TD height=25>
 										<TABLE cellSpacing=0 cellPadding=2 border=0>
 											<TBODY>
-												<TR>
-													<TD>拜访时间：从</TD>
-													<TD>
-													<input type="text" id="visit_time" name="visit_time" readonly="readonly" value="<s:date name="visit_time" format="yyyy-MM-dd"/>"/>
-													</TD>
-													<TD>到</TD>
-													<TD>
-													<input type="text" id="visit_end_time" name="visit_end_time" readonly="readonly" value="<s:date name="visit_end_time" format="yyyy-MM-dd"/>"/>
-													</TD>
-													<TD><INPUT class=button id=sButton2 type=submit
-														value=" 筛选 " name=sButton2></TD>
-												</TR>
+												
 											</TBODY>
 										</TABLE>
 									</TD>
@@ -94,8 +83,8 @@
 											<TBODY>
 												<TR
 													style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
-													<TD>业务员名称</TD>
-													<TD>客户名称</TD>
+													<TD>分类名</TD>
+													<TD>父分类</TD>
 													<TD>拜访时间</TD>
 													<TD>拜访地点</TD>
 													<TD>拜访详情</TD>
@@ -105,17 +94,9 @@
 												<s:iterator value="list">
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD><s:property value="user.user_name"/></TD>
+													<TD><s:property value="category.categoryName"/></TD>
 													<TD>
-														<s:property value="customer.cust_name"/>
-													</TD>
-													<TD>
-														<s:date name="visit_time" format="yyyy-MM-dd"/>
-													</TD>
-													<TD><s:property value="visit_addr"/></TD>
-													<TD><s:property value="visit_detail"/></TD>
-													<TD>
-														<s:date name="visit_nexttime" format="yyyy-MM-dd"/>
+														<s:property value="category.categoryName"/>
 													</TD>
 													<TD>
 													<a href="#">修改</a>

@@ -56,7 +56,7 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-<%-- <s:debug></s:debug> --%>
+
 	<FORM id="customerForm" name="customerForm"
 		action="${pageContext.request.contextPath }/customer_findAllCustomers.action"
 		method=post>

@@ -10,33 +10,7 @@
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		// 异步加载客户信息
-		$.post("${pageContext.request.contextPath }/customer_findAllCustomer.action",{},function(data){
-			$(data).each(function(i,n){
-				$("#customer").append("<option value='"+n.cust_id+"'>"+n.cust_name+"</option>");
-			});
-		},"json");
-		// 异步加载用户信息
-		$.post("${pageContext.request.contextPath }/user_findAllUsers.action",{},function(data){
-			$(data).each(function(i,n){
-				$("#user").append("<option value='"+n.user_id+"'>"+n.user_name+"</option>");
-			});
-		},"json");
-	});
-</script>
-<!-- 日期插件，使用jquery -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery-1.4.2.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/jquery/jquery.datepick.css" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery.datepick.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery.datepick-zh-CN.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$('#visit_time').datepick({dateFormat: 'yy-mm-dd'}); 
-		$('#visit_nexttime').datepick({dateFormat: 'yy-mm-dd'}); 
-	});
-</script>
+
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
@@ -62,48 +36,24 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：客户拜访记录管理 &gt; 添加客户拜访记录</TD>
+								<TD class=manageHead>当前位置：图书分类管理 &gt; 添加图书分类</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
 							</TR>
 						</TABLE>
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
-							<tr>
-								<td>拜访客户：</td>
-								<td>
-									<select name="customer.cust_id" id="customer">
-										<option value="">-请选择-</option>
-									</select>
-								</td>
-								<td>业务员名称：</td>
-								<td>
-									<select name="user.user_id" id="user">
-										<option value="">-请选择-</option>
-									</select>
-								</td>
-							</tr>
 							<TR>
-								
-								<td>拜访时间：</td>
+								<td>图书分类：</td>
 								<td>
-									<s:textfield readonly="true" id="visit_time" cssClass="textbox" cssStyle="WIDTH: 180px" name="visit_time" />
+									<s:textfield  id="categoryName" cssClass="textbox" cssStyle="WIDTH: 180px" name="categoryName" />
 								</td>
-								<td>拜访地点 ：</td>
+								<td>父分类：</td>
 								<td>
-								<s:textfield cssClass="textbox" id="sChannel2" cssStyle="WIDTH: 180px" maxlength="50" name="visit_addr"/>
+									<s:textfield cssClass="textbox" id="sChannel2" cssStyle="WIDTH: 180px" maxlength="50" name="pid"/>
 								</td>
 							</TR>
-							<TR>
-								<td>拜访详情 ：</td>
-								<td>
-								<s:textfield cssClass="textbox" id="sChannel2" cssStyle="WIDTH: 180px" maxlength="50" name="visit_detail"/>
-								</td>
-								<td>下次拜访时间 ：</td>
-								<td>
-								<s:textfield readonly="true" id="visit_nexttime" cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" name="visit_nexttime"/>
-								</td>
-							</TR>
+							
 							<tr>
 								<td rowspan=2>
 								<INPUT class=button id=sButton2 type=submit

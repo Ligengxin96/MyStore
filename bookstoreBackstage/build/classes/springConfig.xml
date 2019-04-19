@@ -77,6 +77,14 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<!-- 配置book -->
+	<bean id="bookAction" class="com.bookstoreBackstage.web.action.BookAction" scope="prototype"></bean>
+	<bean id="bookService" class="com.bookstoreBackstage.service.impl.BookServiceImpl"></bean>
+	
+	<bean id="bookDao" class="com.bookstoreBackstage.dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	
 	
 </beans>

@@ -46,18 +46,31 @@
 			</interceptor-ref>
 		</action> 
 		
-		<action name="linkMan_*" class="linkManAction" method="{1}">
-			<result name="saveUI">/jsp/linkman/add.jsp</result>
-			<result name="editUI">/jsp/linkman/edit.jsp</result>
-			<result name="saveSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
-			<result name="deleteSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
-		    <result name="updateSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
-		    <result name="editSuccess" type="redirectAction">linkMan_findAllLinkMans.action</result>
-			<result name="success">/jsp/linkman/list.jsp</result>
+		<action name="book_*" class="bookAction" method="{1}">
+			<result name="saveUI">/jsp/book/add.jsp</result>
+			<result name="editUI">/jsp/book/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">category_findAllCategories.action</result>
+			<result name="deleteSuccess" type="redirectAction">category_findAllCategories.action</result>
+		    <result name="updateSuccess" type="redirectAction">category_findAllCategories.action</result>
+		    <result name="editSuccess" type="redirectAction">category_findAllCategories.action</result>
+			<result name="success">/jsp/category/list.jsp</result>
 			
 			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action> 
+		
+		<!-- <action name="category_*" class="categoryAction" method="{1}">
+			<result name="saveUI">/jsp/category/add.jsp</result>
+			<result name="editUI">/jsp/category/edit.jsp</result>
+			<result name="saveSuccess" type="redirectAction">category_findAllCategories.action</result>
+			<result name="deleteSuccess" type="redirectAction">category_findAllCategories.action</result>
+		    <result name="updateSuccess" type="redirectAction">category_findAllCategories.action</result>
+		    <result name="editSuccess" type="redirectAction">category_findAllCategories.action</result>
+			<result name="success">/jsp/category/list.jsp</result>
+			
+			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>  -->
 		
 		<action name="saleVisit_*" class="saleVisitAction" method="{1}">
 			<result name="saveUI">/jsp/salevisit/add.jsp</result>

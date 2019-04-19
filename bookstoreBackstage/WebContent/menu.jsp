@@ -155,11 +155,11 @@ A.active {
 											cellPadding=2 width=155 align=center border=0>
 											<TBODY>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="linkMan_saveUI.action"
+													<TD class=menuSmall><A class=style2 href="book_saveUI.action"
 														target=main>－新增图书</A></TD>
 												</TR>
 												<TR>
-													<TD class=menuSmall><A class=style2 href="linkMan_findAllLinkMans.action"
+													<TD class=menuSmall><A class=style2 href="book_findAllBooks.action"
 														target=main>－图书列表</A></TD>
 												</TR>
 												
@@ -170,28 +170,7 @@ A.active {
 								<TR>
 									<TD background=images/new_027.jpg height=1></TD>
 								</TR>
-								<TR>
-									<TD class=mainMenu onClick="MenuDisplay('table_5');"><SPAN
-										class=span id=table_5Span>＋</SPAN> 图书分类管理</TD>
-								</TR>
-								<TR>
-									<TD>
-										<TABLE id=table_5 style="DISPLAY: none" cellSpacing=0
-											cellPadding=2 width=155 align=center border=0>
-											<TBODY>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="saleVisit_saveUI.action"
-														target=main>－新增图书分类</A></TD>
-												</TR>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="saleVisit_findAllSaleVisits.action"
-														target=main>－图书分类列表</A></TD>
-												</TR>
-												
-											</TBODY>
-										</TABLE>
-									</TD>
-								</TR>
+								
 								<TR>
 									<TD background=images/new_027.jpg height=1></TD>
 								</TR>
@@ -206,7 +185,7 @@ A.active {
 											<TBODY>
 												<TR>
 													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－ 客户信息查询</A></TD>
+														target=main>－ 订单列表</A></TD>
 												</TR>
 												<TR>
 													<TD class=menuSmall><A class=style2 href="#"
@@ -220,59 +199,7 @@ A.active {
 										</TABLE>
 									</TD>
 								</TR>
-								<TR>
-									<TD background=images/new_027.jpg height=1></TD>
-								</TR>
-								<TR>
-									<TD class=mainMenu onClick="MenuDisplay('table_4');"><SPAN
-										class=span id=table_4Span>＋</SPAN> 统计分析</TD>
-								</TR>
-								<TR>
-									<TD>
-										<TABLE id=table_4 style="DISPLAY: none" cellSpacing=0
-											cellPadding=2 width=155 align=center border=0>
-											<TBODY>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－客户行业统计</A></TD>
-												</TR>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－客户来源统计</A></TD>
-												</TR>
-												
-											</TBODY>
-										</TABLE>
-									</TD>
-								</TR>
-								<TR>
-									<TD background=images/new_027.jpg height=1></TD>
-								</TR>
-								<TR>
-									<TD class=mainMenu onClick="MenuDisplay('table_6');"><SPAN
-										class=span id=table_6Span>＋</SPAN>系统管理</TD>
-								</TR>
-								<TR>
-									<TD>
-										<TABLE id=table_6 style="DISPLAY: none" cellSpacing=0
-											cellPadding=2 width=155 align=center border=0>
-											<TBODY>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－角色管理</A></TD>
-												</TR>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－用户管理</A></TD>
-												</TR>
-												<TR>
-													<TD class=menuSmall><A class=style2 href="#"
-														target=main>－数据字典</A></TD>
-												</TR>
-											</TBODY>
-										</TABLE>
-									</TD>
-								</TR>
+								
 							</TBODY>
 						</TABLE>
 					</TD>
