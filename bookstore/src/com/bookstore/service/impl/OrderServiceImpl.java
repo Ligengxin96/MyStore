@@ -38,4 +38,9 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findOrder(DetachedCriteria criteria) {
 		return orderDao.findAll(criteria);
 	}
+
+	@Override
+	public void deleteOrder(Order order) {
+		orderDao.delete(order);
+	}
 }

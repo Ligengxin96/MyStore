@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 
 import com.bookstore.domain.OrderItem;
-import com.bookstore.domain.ShoppingCart;
 
 public interface OrderItemService {
 
@@ -18,8 +17,14 @@ public interface OrderItemService {
 	/**
 	 * 查找订单详情
 	 * @param orderItemCriteria
-	 * @return 这个订单的详情(所有书籍的数量等等)
+	 * @return 这个订单的详情(所有书籍的数量等等)一个List集合
 	 */
-	public List<OrderItem> findOrderDetail(DetachedCriteria orderItemCriteria);
+	public List<OrderItem> findOrderDetail(DetachedCriteria criteria);
 
+
+	/**
+	 * 删除订单详情
+	 * @param orderItem 订单详细对象
+	 */
+	public void deleteOrderItem(OrderItem orderItem);
 }

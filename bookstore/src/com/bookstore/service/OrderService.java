@@ -34,4 +34,10 @@ public interface OrderService {
 	 */
 	public List<Order> findOrder(DetachedCriteria criteria);
 
+	/**
+	 * 删除订单
+	 * @param order 订单对象
+	 */
+	public void deleteOrder(Order order);
+
 }

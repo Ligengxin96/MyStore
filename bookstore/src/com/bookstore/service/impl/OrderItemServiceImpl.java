@@ -23,8 +23,13 @@ public class OrderItemServiceImpl implements OrderItemService {
 	}
 
 	@Override
-	public List<OrderItem> findOrderDetail(DetachedCriteria orderItemCriteria) {
-		return orderItemDao.findAll(orderItemCriteria);
+	public List<OrderItem> findOrderDetail(DetachedCriteria criteria) {
+		return orderItemDao.findAll(criteria);
+	}
+
+	@Override
+	public void deleteOrderItem(OrderItem orderItem) {
+		orderItemDao.delete(orderItem);
 	}
 
 }

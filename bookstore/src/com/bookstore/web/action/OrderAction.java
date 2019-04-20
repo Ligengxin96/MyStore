@@ -54,12 +54,16 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 	@Resource(name="bookService")
 	private BookService bookService;
 	
-	//订单状态
+	//订单状态和订单id(写出orderid不能设置 不知道为什么 大概率是模型驱动的问题,但是懒得解决了就这样吧 )
 	private String status;
+	private String id;
+	public void setId(String id) {
+		this.id = id;
+	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	//购物车结算的所以书籍的id和数量(不知道怎么传map就都放在数组里)
 	//数组内容为 书籍id,数量,书籍id,数量.............
 	private ArrayList<String> bookIDs;
@@ -181,8 +185,26 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 	 */
 	public void updateOrderStatus(){
 		
-		System.out.println(status);
-	//	order.setOrderStatus("0");
-	//	orderService.updateOrderStatus(order);
+		order = orderService.findOrderById(id);
+		order.setOrderStatus(status);
+		orderService.updateOrderStatus(order);
 	}
+	
+	/**
+	 * 删除订单
+	 */
+	public void deleteOrder(){
+		//先删除订单详情
+		criteria = DetachedCriteria.forClass(OrderItem.class);
+		criteria.add(Restrictions.eq("orderID", id));
+		List<OrderItem> OrderItemList = orderItemService.findOrderDetail(criteria);
+		for (OrderItem orderItem : OrderItemList) {
+			orderItemService.deleteOrderItem(orderItem);
+		}
+		//在删除订单
+		order = orderService.findOrderById(id);
+		orderService.deleteOrder(order);
+	}
+	
+	
 }

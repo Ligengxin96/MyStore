@@ -52,13 +52,13 @@ $(function() {
 				           "</div>"+
 									
 				           "<div class=\"th Settlement\">"+
-				             "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(2)\">付款</button>"+
+				             "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(\'"+n.orderId+"\',2)\">付款</button>"+
 				           "</div>"+
 				           "<div class=\"th total\">"+
 				             "<p>应付：<span class=\"pieces-total\">"+n.total+"</span></p>"+
 				          " </div>"+
 									" <div class=\"th-inner\" >"+
-									   "取消订单"+
+										"<button class=\"layui-btn \" onclick=\"deleteOrder(\'"+n.orderId+"\')\">取消订单</button>"+
 									 "</div>"+
 				         "</div>"+
 				      " </div>"+
@@ -220,7 +220,7 @@ $(function() {
 				           "</div>"+
 									
 				           "<div class=\"th Settlement\">"+
-				           "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(0)\">确认收货</button>"+ 
+				           "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(\'"+n.orderId+"\',0)\">确认收货</button>"+ 
 				           "</div>"+
 				           "<div class=\"th total\">"+
 				             "<p><span class=\"pieces-total\"></span></p>"+ 
@@ -303,10 +303,10 @@ $(function() {
 				           "</div>"+
 									
 				           "<div class=\"th Settlement\">"+
-				           "<button class=\"layui-btn\" >等待发货</button>"+ 
+				          
 				           "</div>"+
 				           "<div class=\"th total\">"+
-				             "<p>预计送达时间:<span class=\"pieces-total\">"+"3天后"+"</span></p>"+ 
+				             "<p><span class=\"pieces-total\"></span></p>"+ 
 				          " </div>"+
 									
 				         "</div>"+
@@ -355,23 +355,56 @@ $(function() {
 </script>
 
 <script type="text/javascript">
-function changeOrderStatus(satus) {
-	var orderId = $("#id").val();
-	debugger;
+ function changeOrderStatus(orderId,satus) {
 	$.ajax({
 		url : "order_updateOrderStatus.action",
-		data : {"orderId":orderId,"status":satus},
+		data : {"id":orderId,"status":satus},
 		cache : false,
 		async : false,
 		type : "POST",
 		dataType : 'json',
 		error : function() {
-			alert("付款成功!请在个人中心查看订单信息");
+			alert("操作成功!");
+			window.location.href="orderItem_userInformationUI.action";
+		},
+	});
+} 
+
+</script>
+<script type="text/javascript">
+ function deleteOrder(orderId) {
+	 debugger;
+	$.ajax({
+		url : "order_deleteOrder.action",
+		data : {"id":orderId},
+		cache : false,
+		async : false,
+		type : "POST",
+		dataType : 'json',
+		error : function() {
+			alert("操作成功!");
+			window.location.href="orderItem_userInformationUI.action";
+		},
+	});
+} 
+
+</script>
+
+<script type="text/javascript">
+function updateInformation() {
+	$.ajax({
+		url : "user_updateInformation.action",
+		data : {},
+		cache : false,
+		async : false,
+		type : "POST",
+		dataType : 'json',
+		error : function() {
+			alert("操作成功!");
 			window.location.href="orderItem_userInformationUI.action";
 		},
 	});
 }
-
 </script>
 
 </head>
@@ -444,7 +477,7 @@ function changeOrderStatus(satus) {
   
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <button class="layui-btn" lay-submit="" lay-filter="demo1">修改信息</button>
+      <button class="layui-btn" lay-submit="" lay-filter="demo1"  onclick="updateInformation()">修改信息</button>
     </div>
   </div>
 </div>

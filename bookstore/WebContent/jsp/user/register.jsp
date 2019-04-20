@@ -192,7 +192,7 @@
 							</div>
 							<div class="layui-form-item login-btn">
 							<div class="layui-input-block">
-							<button class="layui-btn" lay-submit="" lay-filter="demo1" type="submit">注册</button>
+							<button class="layui-btn" lay-submit="" lay-filter="demo1" type="submit" onclick="">注册</button>
 							<div class="layui-input-block">
             </div>
           </form>
