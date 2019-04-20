@@ -9,6 +9,7 @@ public class Order {
 	private String orderStatus;
 	private String address;
 	private String userID;
+	private Double total;
 	
 	private OrderItem orderItem;
 	
@@ -48,6 +49,11 @@ public class Order {
 	public void setOrderItem(OrderItem orderItem) {
 		this.orderItem = orderItem;
 	}
-	
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 	
 }

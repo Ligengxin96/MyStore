@@ -11,31 +11,367 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="icon" href="../res/static/img/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="../res/layui/css/layui.css"  media="all">
-  <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
-  <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-  <script type="text/javascript" src="../res/layui/layui.js"></script>
+  <link rel="icon" href="./res/static/img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./res/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" type="text/css" href="./res/static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="./res/layui/css/layui.css">
+  <script type="text/javascript" src="./res/layui/layui.js"></script>
+  <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
-<script src="./res/layui/layui.js" charset="utf-8"></script>
-<script>
-layui.use(['form', 'layedit', 'laydate'], function(){
-  var form = layui.form
-  ,layer = layui.layer
-  ,layedit = layui.layedit
-  ,laydate = layui.laydate;
-  
-  //日期
-  laydate.render({
-    elem: '#date'
-  });
-  laydate.render({
-    elem: '#date1'
-  });
-  
+
+<script type="text/javascript">
+//未付款订单
+$(function() {
+	$.post("order_showOrder.action",{"status":1},function(data){
+		if (data == '') {
+			$("#unPayOrder").append("<h1>没有未付款订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+		}else { 
+		 $(data).each(function(i, n) {
+			$("#unPayOrder").append(
+					 "<div class=\"content content-nav-base shopcart-content\">"+
+				       "<div class=\"cart w1200\">"+
+				        " <div class=\"cart-table-th\">"+
+				           "<div class=\"\">"+
+							  "<div class=\"th-inner\">"+
+								  "订单时间:"+n.orderTime+"\t收货地址:"+n.address+""+
+								"</div>"+
+				          " </div>"+
+				         "</div>"+
+				         "<div class=\"OrderList\">"+
+				           "<div class=\"order-content\" id=\""+n.orderId+"\">"+
+				             
+				           "</div>"+
+				         "</div>"+
+				   
+				         "<div class=\"FloatBarHolder layui-clear\">"+
+				           "<div class=\"th th-chk\">"+
+				             "<div class=\"select-all\">"+
+				             "</div>"+
+				           "</div>"+
+									
+				           "<div class=\"th Settlement\">"+
+				             "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(2)\">付款</button>"+
+				           "</div>"+
+				           "<div class=\"th total\">"+
+				             "<p>应付：<span class=\"pieces-total\">"+n.total+"</span></p>"+
+				          " </div>"+
+									" <div class=\"th-inner\" >"+
+									   "取消订单"+
+									 "</div>"+
+				         "</div>"+
+				      " </div>"+
+				     "</div>"
+		          )
+		          $.post("orderItem_showOrderItem.action",{"orderId":n.orderId},function(data){
+		     		 $(data).each(function(i, m) {
+		     			$("#"+n.orderId+"").append(
+		     					"<ul class=\"item-content layui-clear\">"+
+		     		            "<li class=\"th th-chk\">"+
+		     		              "<div class=\"select-all\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-item\">"+
+		     		              "<div class=\"item-cont\">"+
+		     		                "<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+m.image+"\" alt=\"\"></a>"+
+		     		                "<div class=\"text\">"+
+		     		                  "<div class=\"title\">"+m.bookName+"</div>"+
+		     		                "</div>"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-price\">"+
+		     		              "<span class=\"th-su\">"+m.currentPrice+'元'+"</span>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-amount\">"+
+		     		              "<div class=\"box-btn layui-clear\">"+
+		     			          	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     		                "<input class=\"Quantity-myinput\" type=\"text\" bookId=\""+m.bookID+"\" name=\"\" value=\""+m.quantity+"本\"  disabled=\"disabled\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-sum\">"+
+		     		              "<span class=\"sum\">"+'小计'+(m.currentPrice*m.quantity).toFixed(1)+'元'+"</span>"+
+		     		          "</ul>" 
+		     		          )
+		     		}); 
+		     	},"json") ;
+		}); 
+		}
+	},"json") ;
+	
+	
 });
+</script>
+
+<script type="text/javascript">
+//未发货订单
+$(function() {
+	$.post("order_showOrder.action",{"status":2},function(data){
+		if (data == '') {
+			$("#unSentOrder").append("<h1>没有未发货订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+		}else { 
+		 $(data).each(function(i, n) {
+			$("#unSentOrder").append(
+					 "<div class=\"content content-nav-base shopcart-content\">"+
+				       "<div class=\"cart w1200\">"+
+				        " <div class=\"cart-table-th\">"+
+				           "<div class=\"\">"+
+							  "<div class=\"th-inner\">"+
+								  "订单时间:"+n.orderTime+"\t收货地址:"+n.address+""+
+								"</div>"+
+				          " </div>"+
+				         "</div>"+
+				         "<div class=\"OrderList\">"+
+				           "<div class=\"order-content\" id=\""+n.orderId+"\">"+
+				             
+				           "</div>"+
+				         "</div>"+
+				   
+				         "<div class=\"FloatBarHolder layui-clear\">"+
+				           "<div class=\"th th-chk\">"+
+				             "<div class=\"select-all\">"+
+				             "</div>"+
+				           "</div>"+
+									
+				           "<div class=\"th Settlement\">"+
+				           "<button class=\"layui-btn\">等待发货</button>"+ 
+				           "</div>"+
+				           "<div class=\"th total\">"+
+				             "<p>预计送达时间:<span class=\"pieces-total\">"+"3天后"+"</span></p>"+ 
+				          " </div>"+
+									
+				         "</div>"+
+				      " </div>"+
+				     "</div>"
+		          )
+		          $.post("orderItem_showOrderItem.action",{"orderId":n.orderId},function(data){
+		     		 $(data).each(function(i, m) {
+		     			$("#"+n.orderId+"").append(
+		     					"<ul class=\"item-content layui-clear\">"+
+		     		            "<li class=\"th th-chk\">"+
+		     		              "<div class=\"select-all\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-item\">"+
+		     		              "<div class=\"item-cont\">"+
+		     		                "<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+m.image+"\" alt=\"\"></a>"+
+		     		                "<div class=\"text\">"+
+		     		                  "<div class=\"title\">"+m.bookName+"</div>"+
+		     		                "</div>"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-price\">"+
+		     		              "<span class=\"th-su\">"+m.currentPrice+'元'+"</span>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-amount\">"+
+		     		              "<div class=\"box-btn layui-clear\">"+
+		     			          	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     		                "<input class=\"Quantity-myinput\" type=\"text\" bookId=\""+m.bookID+"\" name=\"\" value=\""+m.quantity+"本\"  disabled=\"disabled\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-sum\">"+
+		     		              "<span class=\"sum\">"+'小计'+(m.currentPrice*m.quantity).toFixed(1)+'元'+"</span>"+
+		     		          "</ul>" 
+		     		          )
+		     		}); 
+		     	},"json") ;
+		}); 
+		}
+	},"json") ;
+	
+	
+});
+</script>
+
+<script type="text/javascript">
+//未确认收货订单
+$(function() {
+	$.post("order_showOrder.action",{"status":3},function(data){
+		if (data == '') {
+			$("#unConfirmOrder").append("<h1>没有待签收订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+		}else { 
+		 $(data).each(function(i, n) {
+			$("#unConfirmOrder").append(
+					 "<div class=\"content content-nav-base shopcart-content\">"+
+				       "<div class=\"cart w1200\">"+
+				        " <div class=\"cart-table-th\">"+
+				           "<div class=\"\">"+
+							  "<div class=\"th-inner\">"+
+								  "订单时间:"+n.orderTime+"\t收货地址:"+n.address+""+
+								"</div>"+
+				          " </div>"+
+				         "</div>"+
+				         "<div class=\"OrderList\">"+
+				           "<div class=\"order-content\" id=\""+n.orderId+"\">"+
+				             
+				           "</div>"+
+				         "</div>"+
+				   
+				         "<div class=\"FloatBarHolder layui-clear\">"+
+				           "<div class=\"th th-chk\">"+
+				             "<div class=\"select-all\">"+
+				             "</div>"+
+				           "</div>"+
+									
+				           "<div class=\"th Settlement\">"+
+				           "<button class=\"layui-btn\" buttonId=\""+n.orderId+"\" onclick=\"changeOrderStatus(0)\">确认收货</button>"+ 
+				           "</div>"+
+				           "<div class=\"th total\">"+
+				             "<p><span class=\"pieces-total\"></span></p>"+ 
+				          " </div>"+
+									
+				         "</div>"+
+				      " </div>"+
+				     "</div>"
+		          )
+		          $.post("orderItem_showOrderItem.action",{"orderId":n.orderId},function(data){
+		     		 $(data).each(function(i, m) {
+		     			$("#"+n.orderId+"").append(
+		     					"<ul class=\"item-content layui-clear\">"+
+		     		            "<li class=\"th th-chk\">"+
+		     		              "<div class=\"select-all\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-item\">"+
+		     		              "<div class=\"item-cont\">"+
+		     		                "<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+m.image+"\" alt=\"\"></a>"+
+		     		                "<div class=\"text\">"+
+		     		                  "<div class=\"title\">"+m.bookName+"</div>"+
+		     		                "</div>"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-price\">"+
+		     		              "<span class=\"th-su\">"+m.currentPrice+'元'+"</span>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-amount\">"+
+		     		              "<div class=\"box-btn layui-clear\">"+
+		     			          	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     		                "<input class=\"Quantity-myinput\" type=\"text\" bookId=\""+m.bookID+"\" name=\"\" value=\""+m.quantity+"本\"  disabled=\"disabled\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-sum\">"+
+		     		              "<span class=\"sum\">"+'小计'+(m.currentPrice*m.quantity).toFixed(1)+'元'+"</span>"+
+		     		          "</ul>" 
+		     		          )
+		     		}); 
+		     	},"json") ;
+		}); 
+		}
+	},"json") ;
+	
+	
+});
+</script>
+
+<script type="text/javascript">
+//历史订单
+$(function() {
+	$.post("order_showOrder.action",{"status":0},function(data){
+		if (data == '') {
+			$("#historyOrder").append("<h1>没有历史订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+		}else { 
+		 $(data).each(function(i, n) {
+			$("#historyOrder").append(
+					 "<div class=\"content content-nav-base shopcart-content\">"+
+				       "<div class=\"cart w1200\">"+
+				        " <div class=\"cart-table-th\">"+
+				           "<div class=\"\">"+
+							  "<div class=\"th-inner\">"+
+								  "订单时间:"+n.orderTime+"\t收货地址:"+n.address+""+
+								"</div>"+
+				          " </div>"+
+				         "</div>"+
+				         "<div class=\"OrderList\">"+
+				           "<div class=\"order-content\" id=\""+n.orderId+"\">"+
+				             
+				           "</div>"+
+				         "</div>"+
+				   
+				         "<div class=\"FloatBarHolder layui-clear\">"+
+				           "<div class=\"th th-chk\">"+
+				             "<div class=\"select-all\">"+
+				             "</div>"+
+				           "</div>"+
+									
+				           "<div class=\"th Settlement\">"+
+				           "<button class=\"layui-btn\" >等待发货</button>"+ 
+				           "</div>"+
+				           "<div class=\"th total\">"+
+				             "<p>预计送达时间:<span class=\"pieces-total\">"+"3天后"+"</span></p>"+ 
+				          " </div>"+
+									
+				         "</div>"+
+				      " </div>"+
+				     "</div>"
+		          )
+		          $.post("orderItem_showOrderItem.action",{"orderId":n.orderId},function(data){
+		     		 $(data).each(function(i, m) {
+		     			$("#"+n.orderId+"").append(
+		     					"<ul class=\"item-content layui-clear\">"+
+		     		            "<li class=\"th th-chk\">"+
+		     		              "<div class=\"select-all\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-item\">"+
+		     		              "<div class=\"item-cont\">"+
+		     		                "<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+m.image+"\" alt=\"\"></a>"+
+		     		                "<div class=\"text\">"+
+		     		                  "<div class=\"title\">"+m.bookName+"</div>"+
+		     		                "</div>"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-price\">"+
+		     		              "<span class=\"th-su\">"+m.currentPrice+'元'+"</span>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-amount\">"+
+		     		              "<div class=\"box-btn layui-clear\">"+
+		     			          	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     			        	"<div class=\"less mylayui-btn\" >&nbsp;&nbsp;</div>"+
+		     		                "<input class=\"Quantity-myinput\" type=\"text\" bookId=\""+m.bookID+"\" name=\"\" value=\""+m.quantity+"本\"  disabled=\"disabled\">"+
+		     		              "</div>"+
+		     		            "</li>"+
+		     		            "<li class=\"th th-sum\">"+
+		     		              "<span class=\"sum\">"+'小计'+(m.currentPrice*m.quantity).toFixed(1)+'元'+"</span>"+
+		     		          "</ul>" 
+		     		          )
+		     		}); 
+		     	},"json") ;
+		}); 
+		}
+	},"json") ;
+	
+});
+</script>
+
+<script type="text/javascript">
+function changeOrderStatus(satus) {
+	var orderId = $("#id").val();
+	debugger;
+	$.ajax({
+		url : "order_updateOrderStatus.action",
+		data : {"orderId":orderId,"status":satus},
+		cache : false,
+		async : false,
+		type : "POST",
+		dataType : 'json',
+		error : function() {
+			alert("付款成功!请在个人中心查看订单信息");
+			window.location.href="orderItem_userInformationUI.action";
+		},
+	});
+}
+
 </script>
 
 </head>
@@ -59,7 +395,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
         		<a href="user_loginUI.action">登录</a>
         	</s:if>
 		</div>
-         <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span>2</span></div>
+         <div class="sp-cart"><a href="shoppingCart_shoppingCartUI.action">购物车</a><span></span></div>
       </div>
     </div>
   </div>
@@ -74,6 +410,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
     <li>待付款订单</li>
     <li>待发货订单</li>
     <li>待签收订单</li>
+    <li>历史订单</li>
   </ul>
   <div class="layui-tab-content">
     <div class="layui-tab-item layui-show">
@@ -111,18 +448,16 @@ layui.use(['form', 'layedit', 'laydate'], function(){
     </div>
   </div>
 </div>
-    <div class="layui-tab-item" id="unPayOrder">
+
+    <div class="layui-tab-item" id="unPayOrder"></div>	   
+ 
+    <div class="layui-tab-item" id="unSentOrder"></div>
     
+    <div class="layui-tab-item" id="unConfirmOrder"></div>
     
-    </div>
-    <div class="layui-tab-item" id="unSentOrder">
+    <div class="layui-tab-item" id="historyOrder"></div>
     
-    </div>
-    <div class="layui-tab-item" id="unConfirmOrder">
-    
-    </div>
   </div>
-</div>
  
 <script>
 //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
@@ -132,11 +467,6 @@ layui.use('element', function(){
   //…
 });
 </script>
-
-<h1>&nbsp;&nbsp;</h1>
-
-
-
 
 </body>
 </html>

@@ -11,6 +11,7 @@
 		<property name="orderTime" column="orderTime"/>
 		<property name="orderStatus" column="orderStatus"/>
 		<property name="address" column="address"/>
+		<property name="total" column="total"/>
 		<property name="userID" column="userID"/>
 		
 		<!-- <many-to-one name="user" class="com.bookstore.domain.User" column="userID"/> -->

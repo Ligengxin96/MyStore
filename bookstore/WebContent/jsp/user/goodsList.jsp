@@ -26,7 +26,9 @@
  });
 </script>
 
+
 <script>
+//分类列表
     $(document).on('click', '.sort a', function(){		
       $(this).addClass('active').siblings().removeClass('active');
     })

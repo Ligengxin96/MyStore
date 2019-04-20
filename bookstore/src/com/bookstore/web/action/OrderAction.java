@@ -22,11 +22,13 @@ import com.bookstore.service.BookService;
 import com.bookstore.service.OrderItemService;
 import com.bookstore.service.OrderService;
 import com.bookstore.service.ShoppingCartService;
+import com.bookstore.utils.JsonDateValueProcessor;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 
@@ -52,6 +54,12 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 	@Resource(name="bookService")
 	private BookService bookService;
 	
+	//订单状态
+	private String status;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	//购物车结算的所以书籍的id和数量(不知道怎么传map就都放在数组里)
 	//数组内容为 书籍id,数量,书籍id,数量.............
 	private ArrayList<String> bookIDs;
@@ -73,7 +81,14 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 	 */
 	public void produceOrder() throws IOException {
 		User user = (User) ActionContext.getContext().getSession().get("user");
+		double total = 0;
+		DecimalFormat df = new DecimalFormat("0.0");
+		for(int i = 0;i < bookIDs.size();i+=2) {
+			Book book = bookService.findBookByID(bookIDs.get(i));
+			total = total + Double.valueOf(df.format((book.getDiscount()*book.getPrice()/10.0*Double.valueOf(bookIDs.get(i+1)))));
+		}
 		
+		order.setTotal(total);
 		order.setOrderTime(new Date());
 		order.setAddress(user.getUserAddress());
 		order.setuserID(user.getUserId());
@@ -139,4 +154,35 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 		}	
 	}
 	
+	/**
+	 * 查找显示用户未付款订单
+	 * @throws IOException 
+	 */
+	public void showOrder() throws IOException{
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		criteria.add(Restrictions.eq("userID", user.getUserId()));
+		criteria.add(Restrictions.eq("orderStatus", status)); //0=完成 1=待付款 2=已付款,未发货 3=,已发货,待签收
+		criteria.addOrder(org.hibernate.criterion.Order.asc("orderTime"));
+		
+		List<Order> orderList = orderService.findOrder(criteria);
+		//转换成json格式数据
+		JsonConfig config = new JsonConfig();
+		JsonDateValueProcessor jsonValueProcessor = new JsonDateValueProcessor();
+		config.registerJsonValueProcessor(Date.class, jsonValueProcessor);
+		JSONArray jsonArray = JSONArray.fromObject(orderList,config);
+
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
+	}
+	
+	/**
+	 * 确认收货修改订单状态
+	 * @return
+	 */
+	public void updateOrderStatus(){
+		
+		System.out.println(status);
+	//	order.setOrderStatus("0");
+	//	orderService.updateOrderStatus(order);
+	}
 }
