@@ -192,26 +192,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		userService.updateUser(existerUser);
 	}
 	
-/*	*//**
-	 * 查询所有用户然后转JSON输出
-	 * @return NONE
-	 * @throws IOException
-	 *//*
-	public String findAllUsers() throws IOException {
-		//调用业务层
-		List<User> usersList = userService.findAllUsers(criteria);
-
-		//list对象转为json数据
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.setExcludes(new String[] {"password","userstatus"});
-		JSONArray jsonArray = JSONArray.fromObject(usersList, jsonConfig);
-		//回显到页面
-		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
-		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
-		
-		return NONE;
-	}*/
-	
 }
 
 	

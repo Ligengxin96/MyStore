@@ -140,25 +140,4 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return NONE;
 	}
 	
-	/**
-	 * 根据书名查找书籍
-	 * @return
-	 * @throws IOException 
-	 *//*
-	public String findBookByName() throws IOException{
-		criteria.add(Restrictions.like("bookName", "%"+book.getBookName()+"%"));
-		PageBean<Book> pageBean = bookService.findByPage(criteria, currPage, pageSize);
-		List<Book> booksList = pageBean.getList();
-		ActionContext.getContext().getValueStack().push(pageBean);
-
-		//JSONArray jsonArray = JSONArray.fromObject(booksList);
-		// 回显到页面
-		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
-		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
-
-		return NONE;
-		
-	}*/
-	
-	
 }
