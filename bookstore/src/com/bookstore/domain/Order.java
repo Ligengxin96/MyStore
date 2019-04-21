@@ -2,6 +2,11 @@ package com.bookstore.domain;
 
 import java.util.Date;
 
+/**
+ * 订单表
+ * @author Mr.Li
+ *
+ */
 public class Order {
 
 	private String orderId;

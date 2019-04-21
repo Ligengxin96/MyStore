@@ -37,6 +37,21 @@
 </script>
 
 <script type="text/javascript">
+$(function() {
+	var bookId = ${bookId};
+	$.post("comment_findComment.action",{"bookId":bookId},function(data){
+		debugger
+		 $(data).each(function(i, n) {
+			$("#comment").append(
+			"<blockquote class=\"layui-elem-quote layui-quote-nm\">"+n.commentTime+"\t"+n.userName+":"+n.comments+"</blockquote>")
+		}); 
+	
+	},"json") ;
+});
+
+</script>
+
+<script type="text/javascript">
 //添加到购物车
 function addBookToCart() {
 	var bookCount = $('.number-cont input').val();
@@ -97,6 +112,31 @@ function buyNow() {
 }
 </script>
 
+<script type="text/javascript">
+function addComment() {
+	var comments = document.getElementById("myComment").value;
+	var bookId = ${bookId};
+	$.ajax({
+        url : 'comment_addComment.action',
+        data: {"comments":comments,"bookId":bookId},
+        cache : false, 
+        async : false,
+        type : "POST",
+        dataType : 'text',
+        success :function(date){
+        	if(date == "login"){
+        		alert("请先登陆");
+        		window.location.href="user_logoutUI.action";
+        	}
+        	if(date == "success"){
+        		alert("评论成功");
+        		location.reload();
+        	}
+        }
+});
+}
+</script>
+
 </head>
 <body>
   <div class="site-nav-bg">
@@ -126,7 +166,7 @@ function buyNow() {
     <div class="headerLayout w1200">
       <div class="headerCon">
         <h1 class="mallLogo">
-          <a href="#" >
+          <a href="index.jsp" >
             <img src="./res/static/img/logo.png">
           </a>
         </h1>
@@ -203,8 +243,28 @@ function buyNow() {
           </div>
         </div>
       </div>
+      
+       <div align="center" class="header" >
+		<blockquote class="layui-elem-quote">
+			<input id="myComment" type="text" name="title" required lay-verify="required" placeholder="谈谈你对这本书的评论吧" autocomplete="off" class="layui-input"></inpute>
+			<button class="layui-btn" onclick="addComment()">提交评论</button>
+		</blockquote>
+		<!-- //<blockquote class="layui-elem-quote">看看大家怎么评论这本书</blockquote> -->
+  	 </div>  
+   
+   	<div  class="header" id="comment">
+		 <!-- <blockquote class="layui-elem-quote layui-quote-nm">kldxss:挺好用的一本书,很喜欢挺好用的一本书</blockquote> -->
+   </div>  
+      
     </div>
-  </div>
+    
+  </div >
+   
+   
+   
+  
+	   
 
+ 
 </body>
 </html>

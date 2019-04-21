@@ -1,6 +1,10 @@
 package com.bookstore.domain;
 
-//用户的实体
+/**
+ * 用户的实体
+ * @author Mr.Li
+ *
+ */
 public class User {
 	
 	private String userId;		 

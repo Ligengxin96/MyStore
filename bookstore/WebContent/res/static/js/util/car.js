@@ -1,3 +1,9 @@
+/*
+*@Name: 
+*@Author: xuzhiwen
+*@Copyright:layui.com
+*/
+
 layui.define(['layer'],function(exports){
 	var layer = layui.layer;
 	

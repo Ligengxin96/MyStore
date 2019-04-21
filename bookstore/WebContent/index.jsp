@@ -48,7 +48,7 @@
     <div class="headerLayout w1200">
       <div class="headerCon">
         <h1 class="mallLogo">
-          <a href="#" >
+          <a href="index.jsp" >
             <img src="./res/static/img/logo.png">
           </a>
         </h1>

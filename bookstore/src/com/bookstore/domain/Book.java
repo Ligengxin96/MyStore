@@ -1,8 +1,10 @@
 package com.bookstore.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
+/**
+ * 书籍表
+ * @author Mr.Li
+ *
+ */
 public class Book {
 
 	private String bookId;

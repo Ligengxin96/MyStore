@@ -34,4 +34,11 @@ public interface UserService{
 	 * @param user 用户对象
 	 */
 	public void updateUser(User user);
+
+	/**
+	 * 根据用户id查询用户
+	 * @param userId 用户id
+	 * @return 用户对象 
+	 */
+	public User findUserById(String userId);
 }

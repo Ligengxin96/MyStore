@@ -104,6 +104,7 @@ layui.use(['laypage', 'layer'], function(){
 			   "</div>"+
 	           "<div class=\"text\">"+
 	             "<p class=\"title\">"+n.bookName+"</p>"+
+	             "<p class=\"title\">作者:"+n.author+"</p>"+
 	             "<p class=\"price\">"+
 	             "<span class=\"pri\">¥"+(n.price*n.discount/10).toFixed(1)+"</span>"+
 	               "<span class=\"nub\">"+n.discount+"折价</span>"+
@@ -190,7 +191,7 @@ function sort(sort) {
     <div class="headerLayout w1200">
       <div class="headerCon">
         <h1 class="mallLogo">
-          <a href="#" >
+          <a href="index.jsp" >
             <img src="./res/static/img/logo.png">
           </a>
         </h1>

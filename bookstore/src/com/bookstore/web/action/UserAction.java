@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.bookstore.domain.User;
 import com.bookstore.service.UserService;
+import com.bookstore.utils.MD5Utils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -164,7 +165,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 				//用户注册的时候邮箱和电话号码一样才能修改密码
 				if(list.get(0).getUserEmail().equals(user.getUserEmail()) && list.get(0).getUserPhone().equals(user.getUserPhone())) {
 					//先把新密码设置成原本用户的密码
-					list.get(0).setPassword(user.getPassword());
+					list.get(0).setPassword(MD5Utils.md5(user.getPassword()));
 					userService.updateUser(list.get(0));
 					return LOGIN;
 				}else {
@@ -176,6 +177,19 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			addActionError("两次输入的密码不一致!");
 			return NONE;
 		}
+	}
+	
+	/**
+	 * 修改用户信息
+	 */
+	public void updateInformation(){
+		User existerUser = (User) ActionContext.getContext().getSession().get("user");
+		
+		existerUser.setUserAddress(user.getUserAddress());
+		existerUser.setUserEmail(user.getUserEmail());
+		existerUser.setUserPhone(user.getUserPhone());
+		
+		userService.updateUser(existerUser);
 	}
 	
 /*	*//**

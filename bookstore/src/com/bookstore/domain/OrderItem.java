@@ -1,5 +1,10 @@
 package com.bookstore.domain;
 
+/**
+ * 订单详情表
+ * @author Mr.Li
+ *
+ */
 public class OrderItem {
 
 	private String orderItemId;

@@ -94,7 +94,7 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	 */
 	public String findAllBooks() throws IOException {
 		if(serchBookName != null && !"".equals(serchBookName)) {
-			criteria.add(Restrictions.like("bookName", "%"+serchBookName+"%"));
+			criteria.add(Restrictions.or(Restrictions.like("bookName", "%"+serchBookName+"%"), Restrictions.like("author", "%"+serchBookName+"%")));
 		}
 		if(serchCategory != null) {
 			criteria.add(Restrictions.eq("categoryID", serchCategory));

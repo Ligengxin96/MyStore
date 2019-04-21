@@ -48,6 +48,7 @@
 				<value>com/bookstore/domain/Order.hbm.xml</value>
 				<value>com/bookstore/domain/OrderItem.hbm.xml</value>
 				<value>com/bookstore/domain/ShoppingCart.hbm.xml</value>
+				<value>com/bookstore/domain/Comment.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -108,7 +109,12 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	
+	<!-- 配置comment -->
+	<bean id="commentAction" class="com.bookstore.web.action.CommentAction" scope="prototype"></bean>
+	<bean id="commentService" class="com.bookstore.service.impl.CommentServiceImpl"></bean>
+	<bean id="commentDao" class="com.bookstore.dao.impl.CommentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 </beans>	
 	

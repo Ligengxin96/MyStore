@@ -50,6 +50,9 @@
 			<result name="success">/jsp/user/userInformation.jsp</result>
 		</action> 
 		
+		<!-- comment逻辑视图 -->
+		<action name="comment_*" class="commentAction" method="{1}"></action> 
+		
 	</package>
 	
 </struts>

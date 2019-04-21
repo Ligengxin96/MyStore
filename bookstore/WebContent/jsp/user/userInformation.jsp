@@ -391,9 +391,13 @@ $(function() {
 
 <script type="text/javascript">
 function updateInformation() {
+	var userEmail = document.getElementById("userEmail").value;
+	var userPhone = document.getElementById("userPhone").value;
+	var userAddress = document.getElementById("userAddress").value;
+	debugger
 	$.ajax({
 		url : "user_updateInformation.action",
-		data : {},
+		data : {"userEmail":userEmail,"userPhone":userPhone,"userAddress":userAddress},
 		cache : false,
 		async : false,
 		type : "POST",
@@ -451,7 +455,7 @@ function updateInformation() {
     <div class="layui-inline">
       <label class="layui-form-label">我的邮箱</label>
       <div class="layui-input-inline">
-        <input type="text" value="${user.userEmail}" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+        <input id="userEmail" type="text" value="${user.userEmail}" name="email" lay-verify="email" autocomplete="off" class="layui-input">
       </div>
     </div>
   </div>
@@ -460,7 +464,7 @@ function updateInformation() {
     <div class="layui-inline">
       <label class="layui-form-label">我的手机号</label>
       <div class="layui-input-inline">
-        <input type="text" value="${user.userPhone}" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+        <input id="userPhone" type="text" value="${user.userPhone}" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
       </div>
     </div>
     </div>
@@ -469,7 +473,7 @@ function updateInformation() {
     <div class="layui-inline">
       <label class="layui-form-label">收货地址</label>
       <div class="layui-input-inline-my" >
-        <input width="500px" type="text" value="${user.userAddress}" name="address" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+        <input id="userAddress" width="500px" type="text" value="${user.userAddress}" name="address" lay-verify="required|phone" autocomplete="off" class="layui-input" >
       </div>
     </div>
     </div>
