@@ -190,6 +190,11 @@
 							<div class="layui-input-inline">
 								<input type="text"  id="userPhone" name="userPhone" value="<s:property value="userPhone"/>" required  lay-verify="required" placeholder="手机号码" autocomplete="off" class="layui-input" onblur="checkUserPhone()"><span id="span04"></span>
 							</div>
+							<div class="layui-input-inline">
+							</div>
+							<div class="layui-input-inline">
+								<input type="text"  id="userAddress" name="userAddress" value="<s:property value="userAddress"/>" required  lay-verify="required" placeholder="收货地址" autocomplete="off" class="layui-input" ><span id="span04"></span>
+							</div>
 							<div class="layui-form-item login-btn">
 							<div class="layui-input-block">
 							<button class="layui-btn" lay-submit="" lay-filter="demo1" type="submit" onclick="">注册</button>

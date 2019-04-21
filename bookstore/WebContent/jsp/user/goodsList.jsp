@@ -29,10 +29,10 @@
 
 <script>
 //分类列表
-    $(document).on('click', '.sort a', function(){		
-      $(this).addClass('active').siblings().removeClass('active');
+    $(document).on('click', '.sort a', function(){	
+      //$(this).addClass('active').siblings().removeClass('active');
     })
-    $(document).on('click', '.list-box dd a', function(){		
+    $(document).on('click', '.list-box dd a', function(){	
     	var category = $(this).attr("id");
     	window.sessionStorage.setItem("category",category);
     	location.reload();
@@ -82,9 +82,13 @@ layui.use(['laypage', 'layer'], function(){
     elem: 'demo0'
     ,count: window.sessionStorage.getItem("bookCount") //数据总数
     ,jump: function(obj){
+    	var sort = window.sessionStorage.getItem("sort");
+    	if(sort == null){
+    		sort = "sortByPrice";
+    	}
     	$.ajax({
     		 url :'book_findAllBooks.action',
-    		 data:{"currPage":obj.curr,"serchBookName":$("#bookName").val(),"serchCategory":window.sessionStorage.getItem("category")},
+    		 data:{"currPage":obj.curr,"serchBookName":$("#bookName").val(),"serchCategory":window.sessionStorage.getItem("category"),"sort":window.sessionStorage.getItem("sort")},
 			 cache : false,
 			 async : true,
 		     type : "POST",
@@ -126,9 +130,10 @@ $("#searchBook").click(function() {
 </script>
 
 <script type="text/javascript">
-$(document).on('click', '.list-box dd a', function(){		
+$(document).on('click', '.list-box dd a', function(){
 	var category = $(this).attr("id");
 	window.sessionStorage.setItem("category",category);
+	alert(category);
 	location.reload();
 });
 </script>
@@ -137,6 +142,22 @@ $(document).on('click', '.list-box dd a', function(){
 	function removeAttr() {
 	window.sessionStorage.removeItem("category");
 	window.location.href="book_goodsListUI.action";
+}
+</script>
+
+<script type="text/javascript">
+function sort(sort) {
+	if(sort == 1){
+		var sort = "sortByPrice";
+		window.sessionStorage.setItem("sort",sort);
+		location.reload();
+	}
+	if(sort == 2){
+		var sort = "sortByDiscount";
+		window.sessionStorage.setItem("sort",sort);
+		location.reload();
+		
+	}
 }
 </script>
 
@@ -211,10 +232,10 @@ $(document).on('click', '.list-box dd a', function(){
         <div class="right-cont-wrap">
           <div class="right-cont">
             <div class="sort layui-clear">
-              <a class="active" href="javascript:;" event = 'volume'>销量</a>
-              <a href="javascript:;" event = 'price'>价格</a>
-              <a href="javascript:;" event = 'newprod'>新品</a>
-              <a href="javascript:;" event = 'collection'>收藏</a>
+              <a  href="" onclick="sort(1)" event = 'volume'>价格</a>
+              <a  href="javascript:;" onclick="sort(2)" event = 'price'>折扣</a>
+              <a  href="javascript:;" event = 'newprod'>销量</a>
+              <a  href="javascript:;" event = 'collection'>收藏</a>
             </div>
             <div class="prod-number">
               <span>&nbsp;</span>

@@ -37,6 +37,7 @@
 </script>
 
 <script type="text/javascript">
+//添加到购物车
 function addBookToCart() {
 	var bookCount = $('.number-cont input').val();
 	var bookId = ${bookId};
@@ -46,10 +47,53 @@ function addBookToCart() {
 	        cache : false, 
 	        async : false,
 	        type : "POST",
-	        dataType : 'json',
+	        dataType : 'text',
+	        success :function(date){
+	        	if(date == "login"){
+	        		alert("请先登陆");
+	        		window.location.href="user_logoutUI.action";
+	        	}
+	        	if(date == "addSuccess"){
+	        		alert("加入购物车成功");
+	        	}
+	        }
     });
-	alert("加入购物车成功");
+	
 	//window.location.href="shoppingCart_addBookToCart.action?bookId=${bookId}&bookCount="+bookCount;
+}
+</script>
+
+<script type="text/javascript">
+//点击立即购买后直接产生订单
+function buyNow() {
+	var bookIDs = [];
+	var bookCount = $('.number-cont input').val();
+	var bookId = ${bookId};
+	bookIDs.push(bookId);
+	bookIDs.push(bookCount);
+	var params = $.param({'bookIDs' : bookIDs}, true);
+	 $.ajax({
+	        url : 'order_buyNow.action',
+	        data: params,
+	        cache : false, 
+	        async : false,
+	        type : "POST",
+	        dataType : 'text',
+	        success :function(date){
+	        	debugger
+	        	if(date == "login"){
+	        		alert("请先登陆");
+	        		window.location.href="user_logoutUI.action";
+	        	}
+	        	else{
+	        		//获取的数据是text 直接window.sessionStorage.setItem("orderId",str); 报错 需要转换下数据类型(var str = date;)
+	        		var str = date;
+	        		window.sessionStorage.setItem("orderId",str);
+	        		window.location.href = "order_myOrderUI.action";
+	        	}
+	        }
+    });
+	
 }
 </script>
 
@@ -152,7 +196,7 @@ function addBookToCart() {
             </div>
            
             <div class="choose-btns">
-              <button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button>
+              <a onclick="buyNow()" ><button class="layui-btn layui-btn-primary purchase-btn">立刻购买</button></a>
            
              <a onclick="addBookToCart()" ><button class="layui-btn  layui-btn-danger car-btn"><i class="layui-icon layui-icon-cart-simple"></i>加入购物车</button>  </a>
             </div>

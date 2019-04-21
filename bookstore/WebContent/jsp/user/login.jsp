@@ -88,7 +88,7 @@
 							<div class="layui-input-block">
 							<button class="layui-btn" onclick="registerUI()" type="button">立即注册</button>
              				 </div>
-							</div>
+             				 <div class="layui-input-block"> </div>
 							<p><a href="user_changePasswordUI.action" class="fr">忘记密码？</a></p>
             </div>
           </form>

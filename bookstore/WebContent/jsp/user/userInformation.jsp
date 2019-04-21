@@ -26,7 +26,7 @@
 $(function() {
 	$.post("order_showOrder.action",{"status":1},function(data){
 		if (data == '') {
-			$("#unPayOrder").append("<h1>没有未付款订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+			$("#unPayOrder").append("<h1>没有未付款订单,<a href=\"book_goodsListUI.action\" class=\"active\">点击这里前往商品页面购物</a>");
 		}else { 
 		 $(data).each(function(i, n) {
 			$("#unPayOrder").append(
@@ -111,7 +111,7 @@ $(function() {
 $(function() {
 	$.post("order_showOrder.action",{"status":2},function(data){
 		if (data == '') {
-			$("#unSentOrder").append("<h1>没有未发货订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+			$("#unSentOrder").append("<h1>没有未发货订单,<a href=\"book_goodsListUI.action\" class=\"active\">点击这里前往商品页面购物</a>");
 		}else { 
 		 $(data).each(function(i, n) {
 			$("#unSentOrder").append(
@@ -194,7 +194,7 @@ $(function() {
 $(function() {
 	$.post("order_showOrder.action",{"status":3},function(data){
 		if (data == '') {
-			$("#unConfirmOrder").append("<h1>没有待签收订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+			$("#unConfirmOrder").append("<h1>没有待签收订单,<a href=\"book_goodsListUI.action\" class=\"active\">点击这里前往商品页面购物</a>");
 		}else { 
 		 $(data).each(function(i, n) {
 			$("#unConfirmOrder").append(
@@ -277,7 +277,7 @@ $(function() {
 $(function() {
 	$.post("order_showOrder.action",{"status":0},function(data){
 		if (data == '') {
-			$("#historyOrder").append("<h1>没有历史订单,<a href=\"book_goodsListUI.action\" class=\"active\">现在去购买商品</a>");
+			$("#historyOrder").append("<h1>没有历史订单,<a href=\"book_goodsListUI.action\" class=\"active\">点击这里前往商品页面购物</a>");
 		}else { 
 		 $(data).each(function(i, n) {
 			$("#historyOrder").append(
@@ -373,7 +373,6 @@ $(function() {
 </script>
 <script type="text/javascript">
  function deleteOrder(orderId) {
-	 debugger;
 	$.ajax({
 		url : "order_deleteOrder.action",
 		data : {"id":orderId},

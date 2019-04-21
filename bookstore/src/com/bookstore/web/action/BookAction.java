@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.bookstore.domain.Book;
@@ -40,10 +41,23 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 
 	//每页显示记录的个数
 	private static final Integer pageSize = 12;
-	//使用set方法接收当前页(currPage)和输入的书名(serchBookName)
+	/**
+	 * 使用set方法接收
+	 * 当前页(currPage)
+	 * 输入的书名(serchBookName)
+	 * 分类搜索(serchCategory)
+	 * 排序方式(sort)默认按价格排序
+	 */
 	private Integer currPage;
 	private String serchBookName;
 	private Long serchCategory;
+	private String sort = "sortByPrice"; 
+	public void setSort(String sort) {
+		if(sort == null || "".equals(sort)) {
+			sort = "sortByPrice";
+		}
+		this.sort = sort;
+	}
 	public void setCurrPage(Integer currPage) {
 		this.currPage = currPage;
 	}
@@ -85,6 +99,13 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		if(serchCategory != null) {
 			criteria.add(Restrictions.eq("categoryID", serchCategory));
 		}
+		if("sortByPrice".equals(sort)) {
+			criteria.addOrder(Order.asc("price"));
+		}
+		if ("sortByDiscount".equals(sort)) {
+			criteria.addOrder(Order.asc("discount"));
+		}
+
 		PageBean<Book> pageBean = bookService.findByPage(criteria, currPage, pageSize);
 		List<Book> booksList = pageBean.getList();
 

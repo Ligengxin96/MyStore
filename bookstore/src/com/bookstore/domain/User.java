@@ -1,8 +1,5 @@
 package com.bookstore.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 //用户的实体
 public class User {
 	

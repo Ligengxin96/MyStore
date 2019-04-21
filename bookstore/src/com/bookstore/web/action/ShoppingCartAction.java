@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
@@ -75,12 +76,15 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	/**
 	 * 添加商品到购物车
 	 * @return 购物车页面
+	 * @throws IOException 
 	 */
-	public String addBookToCart() {
+	public String addBookToCart() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
 		//用户没登陆就不允许使用购物车,跳转到登陆页面
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		if(user == null) {
-			return LOGIN;
+			response.getWriter().print("login");
+			return null;
 		}
 		//查找需要添加的书籍信息
 		bookCriteria.add(Restrictions.eq("bookId", bookId));
@@ -109,8 +113,9 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 			
 			shoppingCartService.save(shoppingCart);
 		}
+		response.getWriter().print("addSuccess");
 		
-		return "shoppingCartUI";
+		return null;
 	}
 	
 	/**

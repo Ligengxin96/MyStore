@@ -87,9 +87,7 @@
 					i--;
 				}
 			}
-			var params = $.param({
-				'bookIDs' : bookIDs
-			}, true);
+			var params = $.param({'bookIDs' : bookIDs}, true);
 			var url = 'order_produceOrder.action';
 			$.ajax({
 				url : url,

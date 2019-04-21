@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
@@ -79,6 +80,39 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 	}
 	
 	/**
+	 * 点击立即购买生成订单
+	 * @return 
+	 * @throws IOException
+	 */
+	public String buyNow() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		if(user == null) {
+			response.getWriter().print("login");
+			return null;
+		}
+		double total = 0;
+		DecimalFormat df = new DecimalFormat("0.0");
+		for(int i = 0;i < bookIDs.size();i+=2) {
+			Book book = bookService.findBookByID(bookIDs.get(i));
+			total = total + Double.valueOf(df.format((book.getDiscount()*book.getPrice()/10.0*Double.valueOf(bookIDs.get(i+1)))));
+		}
+		
+		order.setTotal(total);
+		order.setOrderTime(new Date());
+		order.setAddress(user.getUserAddress());
+		order.setuserID(user.getUserId());
+		order.setOrderId(UUID.randomUUID().toString());
+		//生成订单
+		orderService.produceOrder(order);
+		//保存订单详情
+		orderDetail(order.getOrderId());
+		
+		response.getWriter().print(order.getOrderId().toString());
+		return null;
+	}
+	
+	/**
 	 * 生成订单
 	 * @return
 	 * @throws IOException 
@@ -112,6 +146,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
 	}
+	
 	
 	/**
 	 * 生成订单详情
