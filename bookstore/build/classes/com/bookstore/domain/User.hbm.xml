@@ -3,6 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+<!-- 这个文件经常Hibernate经常报异常,所以需要剪切下然后重写 -->
 	<class name="com.bookstore.domain.User" table="user">
 		<id name="userId" column="userId">
 			<generator class="uuid2" />
