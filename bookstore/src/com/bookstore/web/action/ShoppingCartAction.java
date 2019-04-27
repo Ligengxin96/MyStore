@@ -75,7 +75,7 @@ public class ShoppingCartAction extends ActionSupport implements ModelDriven<Sho
 	
 	/**
 	 * 添加商品到购物车
-	 * @return 购物车页面
+	 * @return 向前端输出"lonin"或者"addSuccess"
 	 * @throws IOException 
 	 */
 	public String addBookToCart() throws IOException {

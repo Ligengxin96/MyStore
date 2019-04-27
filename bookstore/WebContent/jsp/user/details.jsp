@@ -66,7 +66,7 @@ function addBookToCart() {
 	        success :function(date){
 	        	if(date == "login"){
 	        		alert("请先登陆");
-	        		window.location.href="user_logoutUI.action";
+	        		window.location.href="user_loginUI.action";
 	        	}
 	        	if(date == "addSuccess"){
 	        		alert("加入购物车成功");
