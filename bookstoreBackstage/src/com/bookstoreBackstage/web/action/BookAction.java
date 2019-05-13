@@ -201,12 +201,8 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 			// 文件上传：
 			// 设置文件上传路径:
 			String path = "D:/Eclipse/eclipse-workspaceForProject/bookstore/WebContent/res/static/bookImgs/";
-			//String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/bookstore/res/static/bookImgs/";
-			//String path = "G:/upload";
 			// 一个目录下存放的相同文件名：随机文件名
 			String uuidFileName = UploadUtils.getUuidFileName(imageFileName);
-			// 一个目录下存放的文件过多：目录分离
-			//String realPath = UploadUtils.getPath(uuidFileName);
 			// 创建目录:
 			String url = path;
 			File file = new File(url);
