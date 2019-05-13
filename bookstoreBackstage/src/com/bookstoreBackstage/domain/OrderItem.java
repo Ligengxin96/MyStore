@@ -1,13 +1,18 @@
 package com.bookstoreBackstage.domain;
 
+/**
+ * 订单详情表
+ * @author Mr.Li
+ *
+ */
 public class OrderItem {
 
 	private String orderItemId;
 	private Long  quantity;
-	private Long subtotal;
+	private Double subtotal;
 	private String bookId;
 	private String bookName;
-	private Long currentPrice;
+	private Double currentPrice;
 	private String image;
 	private String orderID;
 	
@@ -23,10 +28,10 @@ public class OrderItem {
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
-	public Long getSubtotal() {
+	public Double getSubtotal() {
 		return subtotal;
 	}
-	public void setSubtotal(Long subtotal) {
+	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
 	public String getBookId() {
@@ -41,10 +46,10 @@ public class OrderItem {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public Long getCurrentPrice() {
+	public Double getCurrentPrice() {
 		return currentPrice;
 	}
-	public void setCurrentPrice(Long currentPrice) {
+	public void setCurrentPrice(Double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 	public String getImage() {

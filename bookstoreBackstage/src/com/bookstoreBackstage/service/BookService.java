@@ -39,5 +39,22 @@ public interface BookService{
 	 */
 	public int findBookCount(DetachedCriteria criteria);
 
+	/**
+	 * 保存图书
+	 */
+	public void saveBook(Book book);
+
+	/**
+	 * 删除图书
+	 * @param book 需要删除的book对象
+	 */
+	public void deleteBook(Book book);
+
+	/**
+	 * 修改图书信息
+	 * @param book 需要修改的book对象
+	 */
+	public void updateBook(Book book);
+
 	
 }

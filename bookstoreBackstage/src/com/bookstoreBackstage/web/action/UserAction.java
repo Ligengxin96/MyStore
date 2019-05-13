@@ -115,9 +115,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	public String findAllUsers() throws IOException {
 		//添加查询条件
 		if(user.getUsername() != null && !"".equals(user.getUsername())) {
-			criteria.add(Restrictions.eq("username", user.getUsername()));
+			criteria.add(Restrictions.like("username", "%"+user.getUsername()+"%"));
 		}
-		if(user.getUserStatus() != null) {
+		if(user.getUserStatus() != null && !"".equals(user.getUserStatus())) {
 			criteria.add(Restrictions.eq("userStatus", user.getUserStatus()));
 		}
 		// 调用业务层查询

@@ -1,9 +1,10 @@
 package com.bookstoreBackstage.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-//用户的实体
+/**
+ * 用户的实体
+ * @author Mr.Li
+ *
+ */
 public class User {
 	
 	private String userId;		 
@@ -14,6 +15,11 @@ public class User {
 	private String userAddress;
 	private long money;
 	private String userStatus;
+	
+	//private Set<ShoppingCart> shoppingCart =new HashSet<ShoppingCart>();
+	
+	//用户关联订单
+	//private Set<Order> orders = new HashSet<Order>();
 	
 	public String getUserId() {
 		return userId;
@@ -66,5 +72,19 @@ public class User {
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
 	}
+	
+	/*public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}*/
+	/*public Set<ShoppingCart> getShoppingCart() {
+		return shoppingCart;
+	}
+	public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}*/
+	
 	
 }

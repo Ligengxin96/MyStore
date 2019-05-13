@@ -3,6 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+<!-- 这个文件经常Hibernate经常报异常,所以需要剪切下然后重写 -->
 	<class name="com.bookstoreBackstage.domain.User" table="user">
 		<id name="userId" column="userId">
 			<generator class="uuid2" />
@@ -15,6 +16,16 @@
 		<property name="userAddress" column="userAddress"/>
 		<property name="money" column="money"/>
 		<property name="userStatus" column="userStatus"/>
+		
+		<!-- <set name="orders" inverse="true" cascade="save-update">
+			<key column="userID"/>
+			<one-to-many class="com.bookstore.domain.Order"/>
+		</set> -->
+		
+		<!-- <set name="shoppingCart" inverse="true">
+           <key column="userID"/>
+           <one-to-many class="com.bookstore.domain.ShoppingCart" />
+        </set> -->
 		
 	</class>
 </hibernate-mapping>

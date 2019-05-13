@@ -3,7 +3,11 @@ package com.bookstoreBackstage.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-//图书分类的实体类
+/**
+ * 图书分类的实体类
+ * @author Mr.Li
+ *
+ */
 public class Category {
 	
 	private Long categoryId;

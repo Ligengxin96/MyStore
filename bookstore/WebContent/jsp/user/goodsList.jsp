@@ -134,7 +134,6 @@ $("#searchBook").click(function() {
 $(document).on('click', '.list-box dd a', function(){
 	var category = $(this).attr("id");
 	window.sessionStorage.setItem("category",category);
-	alert(category);
 	location.reload();
 });
 </script>

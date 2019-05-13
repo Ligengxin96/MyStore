@@ -1,10 +1,10 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<TITLE>添加客户</TITLE> 
+<TITLE>修改图书</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
@@ -13,32 +13,13 @@
 
 <script type="text/javascript">
 	$(function() {
-		$.post("${pageContext.request.contextPath }/baseDict_findByTypeCode.action",{"dict_type_code":"001"}
+		$.post("${pageContext.request.contextPath }/category_findAllCategories.action",{}
 		,function(data){
 			 $(data).each(function(i, n) {
-				$("#cust_industry").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
+				$("#categoryID").append("<option value='" + n.categoryId + "'>" + n.categoryName + "</option>");
 			}); 
-			// 使用EL获取值栈的数据
-			$("#cust_industry option[value='${baseDictIndustry.dict_id}']").prop("selected","selected");
+			 $("#categoryID option[value='${category.categoryId}']").prop("selected","selected");
 		},"json"); 
-		
-		$.post("${pageContext.request.contextPath }/baseDict_findByTypeCode.action",{"dict_type_code":"002"}
-		,function(data){
-			 $(data).each(function(i, n) {
-				$("#cust_source").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
-			}); 
-			// 使用EL获取值栈的数据
-		    $("#cust_source option[value='${baseDictSource.dict_id}']").prop("selected","selected");
-		},"json"); 
-		
-		$.post("${pageContext.request.contextPath }/baseDict_findByTypeCode.action",{"dict_type_code":"006"}
-		,function(data){
-			 $(data).each(function(i, n) {
-				$("#cust_level").append("<option value='" + n.dict_id + "'>" + n.dict_item_name + "</option>");
-			}); 
-			// 使用EL获取值栈的数据
-			$("#cust_level option[value='${baseDictLevel.dict_id}']").prop("selected","selected");
-		},"json");
 		
 	});
 	
@@ -49,10 +30,8 @@
 <BODY>
 	<s:actionerror/>
 	<s:fielderror/>
-	<s:form name="form1" id="form1" action="customer_updateCustomer" namespace="/" method="post" enctype="multipart/form-data" theme="simple">
-		<s:hidden name="cust_id" value="%{cust_id}"/>
-		<s:hidden name="cust_image" value="%{cust_image}"/>
-		
+	<s:form name="form1" id="form1" action="book_updateBook" namespace="/" method="post" enctype="multipart/form-data" theme="simple">
+	<s:hidden name="bookId"/><s:hidden name="smallImage"/><s:hidden name="bigImage"/>
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
 				<TR>
@@ -73,7 +52,7 @@
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：客户管理 &gt; 添加客户</TD>
+								<TD class=manageHead>当前位置：图书管理 &gt; 修改图书信息</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -84,59 +63,76 @@
 						  
 						    
 							<TR>
-								<td>客户名称：</td>
+								<td>图书名称：</td>
 								<td>
-									<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
-									name="cust_name" value="%{cust_name}"/>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="bookName" value="%{bookName}"/>
 								</td>
-								<td>客户级别 ：</td>
+								<td>图书分类 ：</td>
 								<td>
-									<select id="cust_level" name="baseDictLevel.dict_id">
-										<option value="">-请选择-</option>
+									<select id="categoryID" name="category.categoryId">
+										<option value="">--请选择--</option>
 									</select>
 								</td>
 							</TR>
 							
 							<TR>
-								
-								<td>信息来源 ：</td>
+								<td>作者 ：</td>
 								<td>
-									<select id="cust_source" name="baseDictSource.dict_id">
-										<option value="">-请选择-</option>
-									</select>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="author" value="%{author}"/>
 								</td>
-								<td>所属行业 ：</td>
+								<td>进货价 ：</td>
 								<td>
-									<select id="cust_industry" name="baseDictIndustry.dict_id">
-										<option value="">-请选择-</option>
-									</select>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="price" value="%{price}"/>
 								</td>
 							</TR>
 							
 							<TR>
 								
-								
-								<td>固定电话 ：</td>
+								<td>当前价 ：</td>
 								<td>
-								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" name="cust_phone" value="%{cust_phone}"/>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="currentPrice" value="%{currentPrice}"/>
 								</td>
-								<td>移动电话 ：</td>
+								<td>折扣 ：</td>
 								<td>
-								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" name="cust_mobile" value="%{cust_mobile}"/>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="discount" value="%{discount}"/>
+								</td>
+							</TR>
+							<TR>
+								
+								<td>ISBN ：</td>
+								<td>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="ISBN" value="%{ISBN}"/>
+								</td>
+								<td>出版社 ：</td>
+								<td>
+								<s:textfield cssClass="textbox" cssStyle="WIDTH: 180px" maxlength="50" 
+									name="press" value="%{press}"/>
 								</td>
 							</TR>
 							
 							<TR>
-								<td>客户资质：</td>
+								<td>小图 ：</td>
 								<td colspan="3">
-									<input type="file" name="upload"/>
+								<!-- 文件上传的3个属性,下面2个属性加上 form 里面的enctype属性 -->
+									<input type="file" name="smallImg">
+								</td>
+								<td>大图 ：</td>
+								<td colspan="3">
+								<!-- 文件上传的3个属性,下面2个属性加上 form 里面的enctype属性 -->
+									<input type="file" name="bigImg">
 								</td>
 							</TR>
 							
 							<tr>
 								<td rowspan=2>
 								<INPUT class=button id=sButton2 type=submit
-														value=" 保存 " name=sButton2>
+														value=" 修改 ">
 								</td>
 							</tr>
 						</TABLE>

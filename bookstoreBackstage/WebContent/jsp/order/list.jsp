@@ -4,23 +4,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<TITLE>图书列表</TITLE> 
+<TITLE>订单列表</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
-<LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
-	rel=stylesheet>
+<LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css rel=stylesheet>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/jquery/jquery.datepick.css" type="text/css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery.datepick.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery.datepick-zh-CN.js"></script>
 
 <script type="text/javascript">
-$(function() {
-	$.post("${pageContext.request.contextPath }/category_findAllCategories.action",{}
+	$(function(){
+		$('#orderTime').datepick({dateFormat: 'yy-mm-dd'}); 
+		$('#endTime').datepick({dateFormat: 'yy-mm-dd'}); 
+	});
+</script>
+<script type="text/javascript">
+/* $(function() {
+	$.post("${pageContext.request.contextPath }/order_findAllOrders.action",{}
 	,function(data){
 		 $(data).each(function(i, n) {
 			$("#categoryID").append("<option value='" + n.categoryId + "'>" + n.categoryName + "</option>");
 		}); 
 	},"json"); 
 	
-});
+}); */
 
 </script>
 <SCRIPT language=javascript>
@@ -36,9 +45,8 @@ $(function() {
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/book_findAllBooks.action"
+		action="${pageContext.request.contextPath }/order_findAllOrders.action"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -61,7 +69,7 @@ $(function() {
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：客户管理 &gt; 客户列表</TD>
+								<TD class=manageHead>当前位置：订单管理 &gt; 订单列表</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
@@ -75,19 +83,18 @@ $(function() {
 										<TABLE cellSpacing=0 cellPadding=2 border=0>
 											<TBODY>
 												<TR>
-													<TD>图书名称：</TD>
-													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="bookName"  value="<s:property value="bookName"/>" /TD>
-													<TD>作者：</TD>
-													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="author"  value="<s:property value="author"/>" /TD>
-													<TD>图书分类：</TD>
+													<TD>订单时间：从</TD>
 													<TD>
-														<select id="categoryID" name="categoryID">
-															<option value="">--请选择--</option>
-														</select>
+													<input type="text" id="orderTime" name="orderTime" readonly="readonly" value="<s:date name="orderTime" format="yyyy-MM-dd"/>"/>
 													</TD>
-													
+													<TD>到</TD>
+													<TD>
+													<input type="text" id="endTime" name="endTime" readonly="readonly" value="<s:date name="endTime" format="yyyy-MM-dd"/>"/>
+													</TD>
+													<TD>订单状态：</TD>
+													<TD>
+														<s:select theme="simple" name="orderStatus" list="#{'0':'完成','1':'待付款','2':'待发货','3':'待签收'}" headerKey="" headerValue="-请选择-"></s:select>
+													</TD>
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " ></TD>
 												</TR>
@@ -104,31 +111,48 @@ $(function() {
 											<TBODY>
 												<TR
 													style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
-													<TD>图书名称</TD>
-													<TD>作者</TD>
-													<TD>进货价</TD>
-													<TD>当前价</TD>
-													<TD>折扣</TD>
-													<TD>出版社</TD>
-													<TD>ISBN</TD>
-													<TD>所属分类</TD>
+													<TD>订单编号</TD>
+													<TD>订单时间</TD>
+													<TD>收货地址</TD>
+													<TD>订单总价</TD>
+													<TD>订单状态</TD>
 													<TD>操作</TD>
 												</TR>
-												<s:iterator value="list">
+												<s:iterator value="list" >
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD><s:property value="bookName"/></TD>
-													<TD><s:property value="author"/></TD>
-													<TD><s:property value="price"/> 元</TD>
-													<TD><s:property value="currentPrice"/> 元</TD>
-													<TD><s:property value="discount"/> 折</TD>
-													<TD><s:property value="press"/></TD>
-													<TD><s:property value="ISBN"/></TD>
-													<TD><s:property value="category.categoryName"/></TD>
+													<TD><s:property value="orderId"/></TD>
+													<TD><s:date name="orderTime" format="yyyy-MM-dd HH:mm:ss"/></TD>
+													<TD><s:property value="address"/></TD>
+													<TD><s:property value="total"/> 元</TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/book_editUI.action?bookId=<s:property value="bookId" />">修改</a>
-													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/book_deleteBook.action?bookId=<s:property value="bookId" />">删除</a>
+														<s:if test='orderStatus == "0"'>
+															完成
+														</s:if>
+														<s:elseif test='orderStatus == "1"'>
+															待付款
+														</s:elseif>
+															<s:if test='orderStatus == "2"'>
+															待发货
+														</s:if>
+														<s:elseif test='orderStatus == "3"'>
+															待签收
+														</s:elseif>
+													</TD>
+													<TD>
+													<s:if test='orderStatus == "0"'>
+														<a href="${pageContext.request.contextPath }/order_deleteOrder.action?orderId=<s:property value="orderId" />">删除订单(订单已完成)</a>
+													</s:if>
+													<s:elseif test='orderStatus == "1"'>
+														<a href="${pageContext.request.contextPath }/order_deleteOrder.action?orderId=<s:property value="orderId" />">删除订单(订单待付款)</a>
+													</s:elseif>
+													<s:if test='orderStatus == "2"'>
+														<a href="${pageContext.request.contextPath }/order_updateOrder.action?orderId=<s:property value="orderId" />">修改为已发货</a>
+													</s:if>
+													<s:elseif test='orderStatus == "3"'>
+														<a href="${pageContext.request.contextPath }/order_deleteOrder.action?orderId=<s:property value="orderId" />">删除订单(订单待签收)</a>
+													</s:elseif>
+												
 													</TD>
 												</TR>
 												</s:iterator>

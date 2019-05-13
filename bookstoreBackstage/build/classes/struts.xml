@@ -42,49 +42,33 @@
 				<!-- 设置上传文件的最大大小 -->
 				<param name="fileUpload.maximumSize">2097152</param>
 				<!-- 设置允许文件的扩展名-->
-				<param name="fileUpload.allowedExtensions">.jpg</param>
+				<param name="fileUpload.allowedExtensions">.jpg,.bmp,.jpeg,.png</param>
 			</interceptor-ref>
 		</action> 
 		
 		<action name="book_*" class="bookAction" method="{1}">
 			<result name="saveUI">/jsp/book/add.jsp</result>
 			<result name="editUI">/jsp/book/edit.jsp</result>
-			<result name="saveSuccess" type="redirectAction">category_findAllCategories.action</result>
-			<result name="deleteSuccess" type="redirectAction">category_findAllCategories.action</result>
-		    <result name="updateSuccess" type="redirectAction">category_findAllCategories.action</result>
-		    <result name="editSuccess" type="redirectAction">category_findAllCategories.action</result>
-			<result name="success">/jsp/category/list.jsp</result>
+			<result name="saveSuccess" type="redirectAction">book_findAllBooks.action</result>
+			<result name="deleteSuccess" type="redirectAction">book_findAllBooks.action</result>
+		    <result name="updateSuccess" type="redirectAction">book_findAllBooks.action</result>
+		    <result name="editSuccess" type="redirectAction">book_findAllBooks.action</result>
+			<result name="success">/jsp/book/list.jsp</result>
 			
 			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action> 
 		
-		<!-- <action name="category_*" class="categoryAction" method="{1}">
-			<result name="saveUI">/jsp/category/add.jsp</result>
-			<result name="editUI">/jsp/category/edit.jsp</result>
-			<result name="saveSuccess" type="redirectAction">category_findAllCategories.action</result>
-			<result name="deleteSuccess" type="redirectAction">category_findAllCategories.action</result>
-		    <result name="updateSuccess" type="redirectAction">category_findAllCategories.action</result>
-		    <result name="editSuccess" type="redirectAction">category_findAllCategories.action</result>
-			<result name="success">/jsp/category/list.jsp</result>
-			
-			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</action>  -->
+		<action name="category_*" class="categoryAction" method="{1}"></action> 
 		
-		<action name="saleVisit_*" class="saleVisitAction" method="{1}">
-			<result name="saveUI">/jsp/salevisit/add.jsp</result>
-			<result name="saveSuccess" type="redirectAction">saleVisit_findAllSaleVisits.action</result>
-			<result name="success">/jsp/salevisit/list.jsp</result>
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="updateSuccess" type="redirectAction">order_findAllOrders.action</result>
+			<result name="success">/jsp/order/list.jsp</result>
 			
 			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action> 
 		
-		<action name="baseDict_*" class="baseDictAction" method="{1}">
-			<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</action> 
 		
 	</package>
 	

@@ -1,12 +1,17 @@
 package com.bookstoreBackstage.domain;
 
+/**
+ * 书籍表
+ * @author Mr.Li
+ *
+ */
 public class Book {
 
 	private String bookId;
 	private String bookName;
 	private String author;
-	private Long price;
-	private Long currentPrice;
+	private Double price;
+	private Double currentPrice;
 	private Double discount;
 	private String ISBN;
 	private String press;
@@ -14,6 +19,10 @@ public class Book {
 	private String smallImage;
 	private String bigImage;
 	private Long categoryID;
+	
+	private Category category;
+	
+	//private Set<ShoppingCart> shoppingCart =new HashSet<ShoppingCart>();
 	
 	public String getBookId() {
 		return bookId;
@@ -39,19 +48,19 @@ public class Book {
 		this.author = author;
 	}
 
-	public Long getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Long getCurrentPrice() {
+	public Double getCurrentPrice() {
 		return currentPrice;
 	}
 
-	public void setCurrentPrice(Long currentPrice) {
+	public void setCurrentPrice(Double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 
@@ -103,12 +112,31 @@ public class Book {
 		this.bigImage = bigImage;
 	}
 
-	public Long getcategoryID() {
+	public Long getCategoryID() {
 		return categoryID;
 	}
 
-	public void setcategoryID(Long categoryID) {
+	public void setCategoryID(Long categoryID) {
 		this.categoryID = categoryID;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	
+	
+	/*public Set<ShoppingCart> getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}*/
+
 
 }

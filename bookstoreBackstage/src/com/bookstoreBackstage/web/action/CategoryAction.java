@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
 import com.bookstoreBackstage.domain.Category;
 import com.bookstoreBackstage.service.CategoryService;
@@ -69,6 +70,7 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
 	 * @throws IOException
 	 */
 	public String findAllCategories() throws IOException {
+		criteria.add(Restrictions.isNotNull("pid"));
 		List<Category> categoryList = categoryService.findCategory(criteria);
 		//list对象转为json数据
 		JsonConfig jsonConfig = new JsonConfig();

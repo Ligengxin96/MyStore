@@ -4,7 +4,9 @@ import java.util.List;
 
 /**
  * 分页的实体
- * 
+ * @author Mr.Li
+ *
+ * @param <T> 需要分页的对象
  */
 public class PageBean<T> {
 	private Integer currPage;	// 当前页数

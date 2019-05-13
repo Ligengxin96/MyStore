@@ -2,13 +2,19 @@ package com.bookstoreBackstage.domain;
 
 import java.util.Date;
 
+/**
+ * 订单表
+ * @author Mr.Li
+ *
+ */
 public class Order {
 
 	private String orderId;
 	private Date orderTime;
-	private Long orderStatus;
+	private String orderStatus;
 	private String address;
 	private String userID;
+	private Double total;
 	
 	private OrderItem orderItem;
 	
@@ -24,10 +30,10 @@ public class Order {
 	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
 	}
-	public Long getOrderStatus() {
+	public String getOrderStatus() {
 		return orderStatus;
 	}
-	public void setOrderStatus(Long orderStatus) {
+	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 	public String getAddress() {
@@ -48,6 +54,11 @@ public class Order {
 	public void setOrderItem(OrderItem orderItem) {
 		this.orderItem = orderItem;
 	}
-	
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 	
 }

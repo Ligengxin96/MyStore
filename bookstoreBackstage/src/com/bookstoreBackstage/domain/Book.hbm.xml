@@ -5,7 +5,6 @@
 <hibernate-mapping>
 	<class name="com.bookstoreBackstage.domain.Book" table="book">
 		<id name="bookId" column="bookId">
-			<generator class="uuid2" />
 		</id>
 		
 		<property name="bookName" column="bookName"/>
@@ -18,7 +17,13 @@
 		<property name="edition" column="edition"/>
 		<property name="smallImage" column="smallImage"/>
 		<property name="bigImage" column="bigImage"/>
-		<property name="categoryID" column="categoryID"/>
+		<!-- <property name="categoryID" column="categoryID"/> -->
+		
+		<many-to-one name="category" class="com.bookstoreBackstage.domain.Category" column="categoryID" />
+		<!-- <set name="shoppingCart" inverse="true">
+           <key column="bookID"/>
+           <one-to-many class="com.bookstore.domain.ShoppingCart" />
+        </set> -->
 		
 	</class>
 </hibernate-mapping>

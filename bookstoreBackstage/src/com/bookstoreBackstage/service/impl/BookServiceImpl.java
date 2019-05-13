@@ -58,4 +58,19 @@ public class BookServiceImpl implements BookService{
 	public int findBookCount(DetachedCriteria criteria) {
 		return bookDao.findCount(criteria); 
 	}
+
+	@Override
+	public void saveBook(Book book) {
+		bookDao.save(book);
+	}
+
+	@Override
+	public void deleteBook(Book book) {
+		bookDao.delete(book);	
+	}
+
+	@Override
+	public void updateBook(Book book) {
+		bookDao.update(book);
+	}
 } 
