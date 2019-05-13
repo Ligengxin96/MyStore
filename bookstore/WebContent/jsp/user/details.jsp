@@ -37,10 +37,10 @@
 </script>
 
 <script type="text/javascript">
+//查询图书评论
 $(function() {
 	var bookId = ${bookId};
 	$.post("comment_findComment.action",{"bookId":bookId},function(data){
-		debugger
 		 $(data).each(function(i, n) {
 			$("#comment").append(
 			"<blockquote class=\"layui-elem-quote layui-quote-nm\">"+n.commentTime+"\t"+n.userName+":"+n.comments+"</blockquote>")
@@ -74,7 +74,6 @@ function addBookToCart() {
 	        }
     });
 	
-	//window.location.href="shoppingCart_addBookToCart.action?bookId=${bookId}&bookCount="+bookCount;
 }
 </script>
 
@@ -113,6 +112,7 @@ function buyNow() {
 </script>
 
 <script type="text/javascript">
+//添加图书评论
 function addComment() {
 	var comments = document.getElementById("myComment").value;
 	var bookId = ${bookId};
@@ -249,11 +249,9 @@ function addComment() {
 			<input id="myComment" type="text" name="title" required lay-verify="required" placeholder="谈谈你对这本书的评论吧" autocomplete="off" class="layui-input"></inpute>
 			<button class="layui-btn" onclick="addComment()">提交评论</button>
 		</blockquote>
-		<!-- //<blockquote class="layui-elem-quote">看看大家怎么评论这本书</blockquote> -->
   	 </div>  
    
    	<div  class="header" id="comment">
-		 <!-- <blockquote class="layui-elem-quote layui-quote-nm">kldxss:挺好用的一本书,很喜欢挺好用的一本书</blockquote> -->
    </div>  
       
     </div>

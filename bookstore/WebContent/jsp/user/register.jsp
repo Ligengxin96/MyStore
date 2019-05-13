@@ -72,7 +72,7 @@
 		//带数据过去  ， 在send方法里面写表单数据。 
 	 	request.send("username="+username);
 	}
-	
+	//检查密码格式合法性
 	function checkPassword(){
 		var password = document.getElementById("password").value;
 		var rePassword = document.getElementById("rePassword").value;
@@ -89,7 +89,7 @@
 		}
 		
 	}
-	
+	//检查用户邮箱格式合法性
 	function checkUserEmail() {
 		var userEmail = document.getElementById("userEmail").value;
 		
@@ -99,7 +99,7 @@
 			document.getElementById("span03").innerHTML = "<font color='red'>请填写正确的邮箱格式!</font>";
 		}
 	}
-	
+	//检查用户手机号码格式合法性
 	function checkUserPhone(){
 		var userPhone = document.getElementById("userPhone").value;
 		

@@ -355,6 +355,7 @@ $(function() {
 </script>
 
 <script type="text/javascript">
+//修改订单状态(付款或者确认收货)
  function changeOrderStatus(orderId,satus) {
 	$.ajax({
 		url : "order_updateOrderStatus.action",
@@ -372,6 +373,7 @@ $(function() {
 
 </script>
 <script type="text/javascript">
+//取消订单
  function deleteOrder(orderId) {
 	$.ajax({
 		url : "order_deleteOrder.action",
@@ -390,11 +392,11 @@ $(function() {
 </script>
 
 <script type="text/javascript">
+//修改用户信息
 function updateInformation() {
 	var userEmail = document.getElementById("userEmail").value;
 	var userPhone = document.getElementById("userPhone").value;
 	var userAddress = document.getElementById("userAddress").value;
-	debugger
 	$.ajax({
 		url : "user_updateInformation.action",
 		data : {"userEmail":userEmail,"userPhone":userPhone,"userAddress":userAddress},

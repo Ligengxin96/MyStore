@@ -65,6 +65,7 @@ $(function() {
 </script>
 
 <script type="text/javascript">
+//计算所选商品总价
 $(function() {
 	var orderId = window.sessionStorage.getItem("orderId");
 	$.post("orderItem_countTotal.action",{"orderId":orderId},function(data){
@@ -81,28 +82,23 @@ $(function() {
 </script>
 
 <script type="text/javascript">
-	function pay() {
-		var orderId = window.sessionStorage.getItem("orderId");
-		$.ajax({
-			url : "orderItem_updateOrderStatus.action",
-			data : {"orderId":orderId},
-			cache : false,
-			async : false,
-			type : "POST",
-			dataType : 'json',
-			error : function() {
-				alert("付款成功!请在个人中心查看订单信息");
-				window.location.href="orderItem_userInformationUI.action";
-			},
-		});
-		
-		/* $.post("orderItem_updateOrderStatus.action",{"orderId":orderId},function(data){
-			$(data).
+//订单付款
+function pay() {
+	var orderId = window.sessionStorage.getItem("orderId");
+	$.ajax({
+		url : "orderItem_updateOrderStatus.action",
+		data : {"orderId":orderId},
+		cache : false,
+		async : false,
+		type : "POST",
+		dataType : 'json',
+		error : function() {
 			alert("付款成功!请在个人中心查看订单信息");
 			window.location.href="orderItem_userInformationUI.action";
-		},"json") ; */
-		
-	}
+		},
+	});
+	
+}
 
 </script>
 

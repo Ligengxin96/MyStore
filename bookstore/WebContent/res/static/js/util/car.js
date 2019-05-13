@@ -29,9 +29,6 @@ var car = {
           piecesTotal.innerHTML = '￥' + price.toFixed(1);
       }
 
-      function fn1(){
-        alert(1)
-      }
       // 小计
       function getSubTotal(ul){
         var unitprice = parseFloat(ul.getElementsByClassName('th-su')[0].innerHTML);//单价

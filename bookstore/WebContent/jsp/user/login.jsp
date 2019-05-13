@@ -15,10 +15,10 @@
   
 <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	function registerUI(){
-		debugger;
-		window.location.href = "user_registerUI.action";
-	} 
+//跳转到注册页面
+function registerUI(){
+	window.location.href = "user_registerUI.action";
+} 
 </script>
 
 </head>

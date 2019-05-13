@@ -18,97 +18,98 @@
 </head>
 
 <script type="text/javascript">
-	//查询用户购物车的书籍
-	$(function() {
-		$.post("shoppingCart_showItem.action",{},function(data) {
-			if (data == '') {
-				window.location.href = "shoppingCart_emptyUI.action";
-			} else {
-				$(data).each(function(i, n) {
-					$("#list-cont").append(
-						"<ul class=\"item-content layui-clear\">"+ 
-						"<li class=\"th th-chk\">"+ 
-							"<div class=\"select-all\">"+ 
-							"<div class=\"cart-checkbox\">"+ 
-							"<input class=\"CheckBoxShop check\" bookID=\""+n.bookID+"\" type=\"checkbox\" num=\"all\" name=\"select-all\" value=\"true\">"+ 
-							"</div>"+ 
-							"</div>"+ 
+//查询用户购物车的书籍
+$(function() {
+	$.post("shoppingCart_showItem.action",{},function(data) {
+		if (data == '') {
+			window.location.href = "shoppingCart_emptyUI.action";
+		} else {
+			$(data).each(function(i, n) {
+				$("#list-cont").append(
+					"<ul class=\"item-content layui-clear\">"+ 
+					"<li class=\"th th-chk\">"+ 
+						"<div class=\"select-all\">"+ 
+						"<div class=\"cart-checkbox\">"+ 
+						"<input class=\"CheckBoxShop check\" bookID=\""+n.bookID+"\" type=\"checkbox\" num=\"all\" name=\"select-all\" value=\"true\">"+ 
+						"</div>"+ 
+						"</div>"+ 
+					"</li>"+ 
+					"<li class=\"th th-item\">"+ 
+						"<div class=\"item-cont\">"+ 
+						"<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+n.bookImage+"\" alt=\"\"></a>"+ 
+						"<div class=\"text\">"+ 
+						"<div class=\"title\">"+ n.bookName+ "</div>"+ 
+						"</div>"+ 
+						"</div>"+ 
+					"</li>"+ 
+						"<li class=\"th th-price\">"+ "<span class=\"th-su\">"+ n.currentPrice+ "</span>"+ "</li>"+ 
+						"<li class=\"th th-amount\">"+ 
+						"<div class=\"box-btn layui-clear\">"+ 
+						"<div class=\"less layui-btn\"  >-</div>"+ 
+						"<input class=\"Quantity-input\" type=\"text\" bookId=\""+n.bookID+"\" name=\"\" value=\""+n.quantity+"\"  disabled=\"disabled\">"+ 
+						"<div class=\"add layui-btn\" >+</div>"+ 
+						"</div>"+ 
+					"</li>"+ 
+					"<li class=\"th th-sum\">"+ 
+						"<span class=\"sum\">"+ (n.currentPrice * n.quantity).toFixed(1)+ "</span>"+ 
 						"</li>"+ 
-						"<li class=\"th th-item\">"+ 
-							"<div class=\"item-cont\">"+ 
-							"<a href=\"javascript:;\"> <img src=\"./res/static/bookImgs/"+n.bookImage+"\" alt=\"\"></a>"+ 
-							"<div class=\"text\">"+ 
-							"<div class=\"title\">"+ n.bookName+ "</div>"+ 
-							"</div>"+ 
-							"</div>"+ 
-						"</li>"+ 
-							"<li class=\"th th-price\">"+ "<span class=\"th-su\">"+ n.currentPrice+ "</span>"+ "</li>"+ 
-							"<li class=\"th th-amount\">"+ 
-							"<div class=\"box-btn layui-clear\">"+ 
-							"<div class=\"less layui-btn\"  >-</div>"+ 
-							"<input class=\"Quantity-input\" type=\"text\" bookId=\""+n.bookID+"\" name=\"\" value=\""+n.quantity+"\"  disabled=\"disabled\">"+ 
-							"<div class=\"add layui-btn\" >+</div>"+ 
-							"</div>"+ 
-						"</li>"+ 
-						"<li class=\"th th-sum\">"+ 
-							"<span class=\"sum\">"+ (n.currentPrice * n.quantity).toFixed(1)+ "</span>"+ 
-							"</li>"+ 
-							"<li class=\"th th-op\">"+ 
-							"<span class=\"dele-btn\" >删除</span>"+ 
-						"</li>"+ "</ul>"
-						)
-			});
-		}
-	}, "json");
+						"<li class=\"th th-op\">"+ 
+						"<span class=\"dele-btn\" >删除</span>"+ 
+					"</li>"+ "</ul>"
+					)
+		});
+	}
+}, "json");
 });
 </script>
 
 <script type="text/javascript">
-	function calculation() {
-		var uls = document.getElementById('list-cont').getElementsByTagName(
-				'ul');//每一行
-		var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
-		var checkAll = document.getElementsByClassName('check-all'); //全选框
-		var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数
-		var piecesTotal = document.getElementsByClassName('pieces-total')[0];//总价
-		var batchdeletion = document.getElementsByClassName('batch-deletion')[0]//批量删除按钮
+//统计所选图书条目,生成订单
+function calculation() {
+	var uls = document.getElementById('list-cont').getElementsByTagName(
+			'ul');//每一行
+	var checkInputs = document.getElementsByClassName('check'); // 所有勾选框
+	var checkAll = document.getElementsByClassName('check-all'); //全选框
+	var SelectedPieces = document.getElementsByClassName('Selected-pieces')[0];//总件数
+	var piecesTotal = document.getElementsByClassName('pieces-total')[0];//总价
+	var batchdeletion = document.getElementsByClassName('batch-deletion')[0]//批量删除按钮
 
-		if (SelectedPieces.innerHTML != 0) {
-			var bookIDs = [];
-			var quantities = [];
-			for (var i = 0; i < uls.length; i++) {
-				var input = uls[i].getElementsByTagName('input')[0];
-				if (input.checked) {
-					var bookID = $(input).attr("bookID");
-					bookIDs.push(bookID);
-					var quantityInput = uls[i].getElementsByClassName('Quantity-input')[0];
-					bookIDs.push(quantityInput.value);
-					uls[i].parentNode.removeChild(uls[i]);
-					i--;
-				}
+	if (SelectedPieces.innerHTML != 0) {
+		var bookIDs = [];
+		var quantities = [];
+		for (var i = 0; i < uls.length; i++) {
+			var input = uls[i].getElementsByTagName('input')[0];
+			if (input.checked) {
+				var bookID = $(input).attr("bookID");
+				bookIDs.push(bookID);
+				var quantityInput = uls[i].getElementsByClassName('Quantity-input')[0];
+				bookIDs.push(quantityInput.value);
+				uls[i].parentNode.removeChild(uls[i]);
+				i--;
 			}
-			var params = $.param({'bookIDs' : bookIDs}, true);
-			var url = 'order_produceOrder.action';
-			$.ajax({
-				url : url,
-				data : params,
-				cache : false,
-				async : false,
-				type : "POST",
-				dataType : 'json',
-				success : function(data) {
-					window.sessionStorage.setItem("orderId",data);
-				},
-				error : function() {
-					alert("系统异常，请稍后重试！");
-				}
-			});
-			window.location.href = "order_myOrderUI.action";
-		} else {
-			layer.msg('请选择商品')
 		}
-
+		var params = $.param({'bookIDs' : bookIDs}, true);
+		var url = 'order_produceOrder.action';
+		$.ajax({
+			url : url,
+			data : params,
+			cache : false,
+			async : false,
+			type : "POST",
+			dataType : 'json',
+			success : function(data) {
+				window.sessionStorage.setItem("orderId",data);
+			},
+			error : function() {
+				alert("系统异常，请稍后重试！");
+			}
+		});
+		window.location.href = "order_myOrderUI.action";
+	} else {
+		layer.msg('请选择商品')
 	}
+
+}
 </script>
 
 <body>

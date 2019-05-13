@@ -123,8 +123,6 @@ layui.use(['laypage', 'layer'], function(){
 <script>
 //书名查找图书
 $("#searchBook").click(function() {
-	//var serchBookName = $("#bookName").val();
-	//window.sessionStorage.setItem("serchBookName",serchBookName);
 	location.reload();
 
 }); 
@@ -139,6 +137,7 @@ $(document).on('click', '.list-box dd a', function(){
 </script>
 
 <script type="text/javascript">
+//移除查询属性
 	function removeAttr() {
 	window.sessionStorage.removeItem("category");
 	window.location.href="book_goodsListUI.action";
@@ -146,13 +145,14 @@ $(document).on('click', '.list-box dd a', function(){
 </script>
 
 <script type="text/javascript">
+//商品排序
 function sort(sort) {
 	if(sort == 1){
 		var sort = "sortByPrice";
 		window.sessionStorage.setItem("sort",sort);
 		location.reload();
 	}
-	if(sort == 2){
+	if(sort == 2){ 
 		var sort = "sortByDiscount";
 		window.sessionStorage.setItem("sort",sort);
 		location.reload();
