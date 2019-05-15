@@ -61,7 +61,7 @@ $(function() {
 					<TD vAlign=top width="100%" bgColor=#ffffff>
 						<TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
 							<TR>
-								<TD class=manageHead>当前位置：客户管理 &gt; 客户列表</TD>
+								<TD class=manageHead>当前位置：图书管理 &gt; 图书列表</TD>
 							</TR>
 							<TR>
 								<TD height=2></TD>
