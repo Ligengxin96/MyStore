@@ -64,7 +64,6 @@
 	<!-- 配置admin -->
 	<bean id="adminAction" class="com.bookstoreBackstage.web.action.AdminAction" scope="prototype"></bean>
 	<bean id="adminService" class="com.bookstoreBackstage.service.impl.AdminServiceImpl"></bean>
-	
 	<bean id="adminDao" class="com.bookstoreBackstage.dao.impl.AdminDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -72,7 +71,6 @@
 	<!-- 配置user -->
 	<bean id="userAction" class="com.bookstoreBackstage.web.action.UserAction" scope="prototype"></bean>
 	<bean id="userService" class="com.bookstoreBackstage.service.impl.UserServiceImpl"></bean>
-	
 	<bean id="userDao" class="com.bookstoreBackstage.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -80,7 +78,6 @@
 	<!-- 配置category -->
 	<bean id="categoryAction" class="com.bookstoreBackstage.web.action.CategoryAction" scope="prototype"></bean>
 	<bean id="categoryService" class="com.bookstoreBackstage.service.impl.CategoryServiceImpl"></bean>
-	
 	<bean id="categoryDao" class="com.bookstoreBackstage.dao.impl.CategoryDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -88,7 +85,6 @@
 	<!-- 配置book -->
 	<bean id="bookAction" class="com.bookstoreBackstage.web.action.BookAction" scope="prototype"></bean>
 	<bean id="bookService" class="com.bookstoreBackstage.service.impl.BookServiceImpl"></bean>
-	
 	<bean id="bookDao" class="com.bookstoreBackstage.dao.impl.BookDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -96,7 +92,6 @@
 	<!-- 配置order -->
 	<bean id="orderAction" class="com.bookstoreBackstage.web.action.OrderAction" scope="prototype"></bean>
 	<bean id="orderService" class="com.bookstoreBackstage.service.impl.OrderServiceImpl"></bean>
-	
 	<bean id="orderDao" class="com.bookstoreBackstage.dao.impl.OrderDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

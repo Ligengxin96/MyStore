@@ -66,7 +66,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "changePasswordUI";
 	}
 	
-	//
+	//跳转到用户个人中心页面
 	public String informationUI(){
 		return "informationUI";
 	}
@@ -134,17 +134,25 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		User isExistUser = userService.login(criteria,user);
 		
 		if(isExistUser != null) {
-			//保存用户信息到session
-			ActionContext.getContext().getSession().put("user", isExistUser);
-			//user.setShoppingCart(shoppingCart);
-			//跳转页面
-			return "index";
+			//判断用户状态是否是冻结
+			if("1".equals(isExistUser.getUserStatus())) {
+				//保存用户信息到session
+				ActionContext.getContext().getSession().put("user", isExistUser);
+				//跳转页面
+				return "index";
+			}
+			if("0".equals(isExistUser.getUserStatus())) {
+				//返回错误信息
+				addActionError("账号安全异常,已被冻结,请联系管理员");
+				return LOGIN;
+			}
+			
 		}else {
 			//返回错误信息
 			addActionError("用户名或密码错误");
 			return LOGIN;
 		}
-		
+		return LOGIN;
 	}
 	
 	/**
